@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+/* Theme tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-blue: #00D4FF;
+  --secondary-blue: #0066FF;
+  --dark-bg: #0A0A0F;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0B0B0;
+  --neon-glow: 0 0 20px rgba(0, 212, 255, 0.5);
+
+  --background: var(--dark-bg);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
@@ -14,13 +23,84 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--dark-bg);
+    --foreground: var(--text-primary);
   }
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  background: var(--background);
+  background: radial-gradient(1200px 1200px at 80% -10%, rgba(0, 102, 255, 0.15), transparent),
+              radial-gradient(1000px 1000px at -10% 0%, rgba(0, 212, 255, 0.12), transparent),
+              var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Glass morphism card */
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset, 0 10px 40px rgba(0, 0, 0, 0.35);
+  transition: background 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset, 0 14px 48px rgba(0, 0, 0, 0.45);
+}
+
+/* Neon button */
+.neon-button {
+  background-image: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  transition: box-shadow 300ms ease, transform 300ms ease, filter 300ms ease;
+}
+.neon-button:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+  transform: translateY(-1px);
+}
+.neon-button:active {
+  transform: translateY(0);
+}
+
+/* Skill badge */
+.skill-badge {
+  background: rgba(0, 102, 255, 0.18);
+  border: 1px solid rgba(0, 160, 255, 0.3);
+  color: #cfefff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.skill-badge:hover {
+  background: rgba(0, 102, 255, 0.28);
+}
+
+.neon-border {
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.25), 0 0 32px rgba(0, 212, 255, 0.2);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.neon-text-glow {
+  text-shadow: 0 0 24px rgba(0, 212, 255, 0.45);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -1,0 +1,47 @@
+{
+  "nav": {"about": "About", "skills": "Skills", "work": "Work", "contact": "Contact"},
+  "hero": {
+    "subtitle": "Senior React Native Developer",
+    "tagline": "Creating high-performance mobile apps with beautiful motion and clean architecture.",
+    "viewWork": "View Work",
+    "downloadCV": "Download CV"
+  },
+  "skills": { "title": "Skills" },
+  "work": {
+    "title": "Work",
+    "tabs": { "components": "Reanimated Components", "projects": "Mobile Projects" },
+    "components": {
+      "scratch": {
+        "title": "Scratch-off Banner",
+        "desc": "SVG + Reanimated + Gesture Handler interactive scratch effect."
+      },
+      "recycled": {
+        "title": "Recycled Carousel",
+        "desc": "Infinite recycled carousel with virtualization for performance."
+      },
+      "tear": {
+        "title": "Tear-off Banner",
+        "desc": "Complex tear interaction using redash and custom gestures."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "cv_en": "Download CV (EN)",
+    "cv_ru": "Download CV (RU)"
+  },
+  "footer": { "made": "Made with AI" },
+  "about": {
+    "title": "About",
+    "desc": "Experienced developer with strong expertise in React Native, TypeScript, and mobile architecture. Skilled in working both independently and within large teams. Responsible for building mobile applications from scratch, publishing to app stores, providing ongoing support, and optimizing performance. Hands-on experience with native modules in Swift and Kotlin. Understand the importance of development processes: actively participated in code reviews, configured CI/CD pipelines, and worked with testing frameworks. Design thoughtful project architectures and write clean, stable, and scalable code.",
+    "exp": "6+ Years Experience",
+    "location": "Moscow, Russia",
+    "availability": "Open to opportunities"
+  }
+}
+
+

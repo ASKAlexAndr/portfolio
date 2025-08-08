@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/getcursor/cursorrules/main/schema.json",
+  "name": "AI Editing Rules for Portfolio",
+  "description": "Repository-wide rules for AI agents.",
+  "rules": [
+    {
+      "id": "no-edit-generated",
+      "description": "Do not edit generated or dependency artifacts",
+      "forbiddenPaths": [
+        "node_modules/**",
+        ".next/**",
+        "build/**",
+        "dist/**",
+        "**/*.lock",
+        "package-lock.json",
+        "yarn.lock",
+        "pnpm-lock.yaml"
+      ],
+      "severity": "error"
+    },
+    {
+      "id": "no-edit-important-line",
+      "description": "Do not modify lines ending with // IMPORTANT",
+      "forbiddenPatterns": ["// IMPORTANT$"],
+      "severity": "error"
+    },
+    {
+      "id": "no-edit-important-block",
+      "description": "Do not modify code inside IMPORTANT block comments",
+      "forbiddenPatterns": ["/\\* IMPORTANT \\*/"],
+      "severity": "error"
+    },
+    {
+      "id": "react-client-hooks-only-in-client-files",
+      "description": "React client hooks must be used only in files with 'use client' directive",
+      "hintPaths": ["src/**/*.{tsx,ts}"]
+    },
+    {
+      "id": "i18n-no-hardcoded-strings",
+      "description": "Avoid hardcoded UI strings in components; prefer t('key')",
+      "hintPaths": ["src/components/**/*.{tsx,ts}"]
+    },
+    {
+      "id": "allow-explicit-override",
+      "description": "Allow modification if explicit override marker present",
+      "allowedPatterns": ["// AI:ALLOW_MODIFY"],
+      "severity": "info"
+    }
+  ]
+}
+
