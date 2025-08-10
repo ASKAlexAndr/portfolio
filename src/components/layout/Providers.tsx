@@ -10,8 +10,12 @@ export default function Providers({ children }: { children: ReactNode }) {
   useEffect(() => {
     const segments = (pathname || "/").split("/").filter(Boolean);
     const maybeLocale = segments[0];
-    if (maybeLocale === "ru") setLanguage("ru");
-    else setLanguage("en");
+    const newLang = maybeLocale === "ru" ? "ru" : "en";
+    
+    // Принудительно устанавливаем язык с небольшой задержкой
+    setTimeout(() => {
+      setLanguage(newLang);
+    }, 0);
   }, [pathname]);
 
   return <>{children}</>;

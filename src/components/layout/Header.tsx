@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Languages, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { setLanguage } from "@/lib/i18n";
 
-const nav = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
+interface NavItem {
+  href: string;
+  key: string;
+}
+
+const navItems: NavItem[] = [
+  { href: "#about", key: "nav.about" },
+  { href: "#skills", key: "nav.skills" },
+  { href: "#work", key: "nav.work" },
+  { href: "#contact", key: "nav.contact" }
 ];
 
 export function Header() {
@@ -20,7 +26,13 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Мемоизируем текущий язык
+  const currentLang = useMemo(() => 
+    pathname?.startsWith("/ru") ? "ru" : "en", 
+    [pathname]
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -29,7 +41,19 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const switchLocale = () => {
+  // Принудительно обновляем компонент при смене языка
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // Язык изменился
+    };
+    
+    i18n.on('languageChanged', handleLanguageChange);
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
+  const switchLocale = useCallback(() => {    
     // Сохраняем текущую позицию скролла
     const scrollPosition = window.scrollY;
     
@@ -61,17 +85,22 @@ export function Header() {
     setTimeout(() => {
       window.scrollTo(0, scrollPosition);
     }, 100);
-  };
+  }, [pathname, router]);
 
-  const currentLang = pathname?.startsWith("/ru") ? "ru" : "en";
+  // Мемоизируем обработчик открытия/закрытия меню
+  const toggleMenu = useCallback(() => {
+    setOpen(prev => !prev);
+  }, []);
 
+  // Мемоизируем обработчик закрытия меню
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+  }, []);
+  
   return (
-    <motion.header
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-        scrolled ? "backdrop-blur-md bg-white/5 border-b border-white/10" : ""
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-md bg-black/40 border-b border-white/5" : "bg-black/20 backdrop-blur-sm"
       }`}
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
@@ -81,7 +110,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm text-secondary">
-          {[{ href: "#about", key: "nav.about" }, { href: "#skills", key: "nav.skills" }, { href: "#work", key: "nav.work" }, { href: "#contact", key: "nav.contact" }].map((n) => (
+          {navItems.map((n) => (
             <a key={n.href} href={n.href} className="hover:text-white transition-colors">
               {t(n.key)}
             </a>
@@ -92,15 +121,19 @@ export function Header() {
           <button
             aria-label="Switch language"
             onClick={switchLocale}
-            className="glass-card px-3 py-2 flex items-center gap-2 hover:shadow-lg cursor-pointer select-none"
+            className="glass-card px-3 py-2 flex items-center gap-2 hover:shadow-lg cursor-pointer select-none transition-all duration-200 hover:bg-white/10"
           >
             <Languages size={18} />
-            <span className="hidden sm:inline">{t(`languages.${currentLang}`)}</span>
+            <span className="hidden sm:inline">
+              <span className="font-semibold text-white">{t(`languages.${currentLang}`)}</span>
+              <span className="text-secondary mx-2">/</span>
+              <span className="text-secondary hover:text-white transition-colors">{t(`languages.${currentLang === "ru" ? "en" : "ru"}`)}</span>
+            </span>
           </button>
           <button
             className="md:hidden glass-card p-2"
             aria-label="Open menu"
-            onClick={() => setOpen((p) => !p)}
+            onClick={toggleMenu}
           >
             <Menu />
           </button>
@@ -110,12 +143,12 @@ export function Header() {
       {open && (
         <div className="md:hidden px-4 pb-4">
           <div className="glass-card p-3 flex flex-col gap-2">
-            {[{ href: "#about", key: "nav.about" }, { href: "#skills", key: "nav.skills" }, { href: "#work", key: "nav.work" }, { href: "#contact", key: "nav.contact" }].map((n) => (
+            {navItems.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
                 className="px-2 py-2 rounded-lg hover:bg-white/5"
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
               >
                 {t(n.key)}
               </a>
@@ -123,7 +156,7 @@ export function Header() {
           </div>
         </div>
       )}
-    </motion.header>
+    </header>
   );
 }
 

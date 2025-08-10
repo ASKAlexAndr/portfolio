@@ -5,11 +5,23 @@ import { FaLinkedin, FaTelegram } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
+
+interface ContactItem {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href: string | null;
+  color: string;
+}
 
 export default function Contact() {
   const { t } = useTranslation();
+  const pathname = usePathname();
   
-  const contactItems = [
+  // Мемоизируем контакты, чтобы избежать пересоздания массива
+  const contactItems = useMemo((): ContactItem[] => [
     {
       icon: <Mail size={24} />,
       label: "Email",
@@ -31,7 +43,7 @@ export default function Contact() {
       href: `https://t.me/${site.telegram.replace(/^@/, "")}`,
       color: "from-blue-400 to-blue-600"
     }
-  ];
+  ], []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -56,7 +68,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 mt-16 mb-16">
+    <section id="contact" className="mx-auto max-w-6xl px-4 mt-16 mb-16" key={pathname}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

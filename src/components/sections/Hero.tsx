@@ -4,38 +4,87 @@ import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import CVDownloadButton from "@/components/ui/CVDownloadButton";
+import { ArrowDown, Code, Smartphone } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useCallback, useMemo } from "react";
+
+interface FloatingIcon {
+  icon: React.ReactNode;
+  position: string;
+  animation: {
+    duration: number;
+    delay?: number;
+  };
+}
 
 export default function Hero() {
   const { t } = useTranslation();
+  const pathname = usePathname();
+  
+  // Мемоизируем плавающие иконки
+  const floatingIcons = useMemo((): FloatingIcon[] => [
+    {
+      icon: <Code size={40} />,
+      position: "absolute top-1/4 left-1/4 text-blue-400/20",
+      animation: { duration: 3 }
+    },
+    {
+      icon: <Smartphone size={40} />,
+      position: "absolute top-1/3 right-1/4 text-cyan-400/20",
+      animation: { duration: 4, delay: 1 }
+    }
+  ], []);
+
+  // Мемоизируем обработчик скролла
+  const handleScrollToAbout = useCallback(() => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   return (
-    <section className="relative min-h-[86vh] flex items-center justify-center pt-24" id="hero">
-      {/* background grid/particles placeholder */}
-      <div className="absolute inset-0 -z-10 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_65%)]">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <section className="relative min-h-[90vh] h-screen flex items-center justify-center pt-24" id="hero" key={`hero-${pathname}`}>
+      {/* Улучшенный background с анимированными частицами */}
+      <div className="absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 flex flex-col items-center text-center gap-6">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight neon-text-glow"
+      {/* Плавающие иконки */}
+      {floatingIcons.map((icon, index) => (
+        <motion.div
+          key={index}
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: icon.animation.duration, repeat: Infinity, ease: "easeInOut" }}
+          className={icon.position}
         >
-          {site.developerName}
+          {icon.icon}
+        </motion.div>
+      ))}
+
+      <div className="mx-auto max-w-6xl px-4 flex flex-col items-center text-center gap-8">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight"
+        >
+          <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
+            {site.developerName}
+          </span>
         </motion.h1>
+        
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-lg md:text-xl text-secondary"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-xl md:text-2xl text-secondary font-medium"
         >
           {t("hero.subtitle")}
         </motion.p>
+        
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="max-w-2xl text-balance text-secondary"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="max-w-3xl text-balance text-secondary text-lg leading-relaxed"
         >
           {t("hero.tagline")}
         </motion.p>
@@ -43,11 +92,41 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex gap-3 mt-2"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 mt-4"
         >
-          <a href="#work" className="neon-button">{t("hero.viewWork")}</a>
+          <motion.a 
+            href="#work" 
+            className="neon-button group relative overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10">{t("hero.viewWork")}</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "0%" }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.a>
           <CVDownloadButton />
+        </motion.div>
+
+        {/* Анимированная стрелка вниз */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="text-secondary hover:text-white cursor-pointer"
+            onClick={handleScrollToAbout}
+          >
+            <ArrowDown size={24} />
+          </motion.div>
         </motion.div>
       </div>
     </section>

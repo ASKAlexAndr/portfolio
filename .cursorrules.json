@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/getcursor/cursorrules/main/schema.json",
   "name": "AI Editing Rules for Portfolio",
-  "description": "Repository-wide rules for AI agents.",
+  "description": "Repository-wide rules for AI agents aligned with project conventions.",
   "rules": [
     {
       "id": "no-edit-generated",
@@ -21,31 +21,268 @@
     {
       "id": "no-edit-important-line",
       "description": "Do not modify lines ending with // IMPORTANT",
-      "forbiddenPatterns": ["// IMPORTANT$"],
+      "forbiddenPatterns": [
+        "// IMPORTANT$"
+      ],
       "severity": "error"
     },
     {
       "id": "no-edit-important-block",
       "description": "Do not modify code inside IMPORTANT block comments",
-      "forbiddenPatterns": ["/\\* IMPORTANT \\*/"],
+      "forbiddenPatterns": [
+        "/\\* IMPORTANT \\*/"
+      ],
       "severity": "error"
+    },
+    {
+      "id": "no-secrets-files",
+      "description": "Do not commit secrets or environment files",
+      "forbiddenPaths": [
+        ".env",
+        ".env.*",
+        "env/*.env",
+        "secrets/**"
+      ],
+      "severity": "error"
+    },
+    {
+      "id": "package-manager-yarn-only",
+      "description": "Use yarn for package management; avoid npm/pnpm/bun commands in scripts/docs",
+      "forbiddenPatterns": [
+        "(^|\\s)(npm|pnpm|bun)\\s+(i|install|add|remove|update|upgrade)\\b"
+      ],
+      "hintPaths": [
+        "**/*.{md,MD,markdown,sh,bash,yml,yaml,json}"
+      ],
+      "examples": [
+        "yarn",
+        "yarn add <pkg>",
+        "yarn add -D <pkg>"
+      ],
+      "severity": "info"
     },
     {
       "id": "react-client-hooks-only-in-client-files",
       "description": "React client hooks must be used only in files with 'use client' directive",
-      "hintPaths": ["src/**/*.{tsx,ts}"]
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ]
+    },
+    {
+      "id": "react-no-default-react-import",
+      "description": "Do not import default React (React 19 JSX runtime). Import named hooks only.",
+      "forbiddenPatterns": [
+        "^import\\s+React(\\s*,\\s*\\{[^}]*\\})?\\s+from\\s+['\"]react['\"];?$"
+      ],
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "severity": "info"
+    },
+    {
+      "id": "next-image-usage-hint",
+      "description": "Prefer next/image over native <img> for optimized images",
+      "forbiddenPatterns": [
+        "<img\\s"
+      ],
+      "hintPaths": [
+        "app/**/*.{tsx,ts}",
+        "src/**/*.{tsx,ts}"
+      ],
+      "severity": "info"
     },
     {
       "id": "i18n-no-hardcoded-strings",
       "description": "Avoid hardcoded UI strings in components; prefer t('key')",
-      "hintPaths": ["src/components/**/*.{tsx,ts}"]
+      "hintPaths": [
+        "src/components/**/*.{tsx,ts}"
+      ]
+    },
+    {
+      "id": "i18n-namespaces-keys",
+      "description": "Use descriptive i18n keys with namespaces (e.g., common.button.save, form.email.label)",
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "t('common.button.save')",
+        "t('form.email.label')"
+      ]
+    },
+    {
+      "id": "tailwind-no-inline-styles",
+      "description": "Avoid inline styles in React components; prefer Tailwind CSS utilities",
+      "forbiddenPatterns": [
+        "style=\\{\\{"
+      ],
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "severity": "info"
+    },
+    {
+      "id": "tailwind-clsx-cn-hint",
+      "description": "Combine classes with clsx and normalize with tailwind-merge (cn helper)",
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "cn('px-4', isActive && 'bg-primary')",
+        "clsx('text-sm', disabled && 'opacity-50')"
+      ]
+    },
+    {
+      "id": "icons-prefer-lucide",
+      "description": "Prefer lucide-react icons; use react-icons only if icon missing in lucide",
+      "forbiddenPatterns": [
+        "from\\s+['\\\"]react-icons"
+      ],
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "severity": "info"
+    },
+    {
+      "id": "framer-motion-performance-hint",
+      "description": "Use small, contained animations; avoid animating large scroll containers without need",
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ]
+    },
+    {
+      "id": "typescript-strict-typing",
+      "description": "Always define interfaces for props and data, avoid 'any', use 'unknown' with type guards, and use generic types for reusable components",
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "interface User { id: string; name: string; email: string; }",
+        "interface ComponentProps { user: User; onUpdate: (user: User) => void; }",
+        "const handleData = (data: unknown) => { if (isUser(data)) { /* data is User */ } };",
+        "interface ListProps<T> { items: T[]; renderItem: (item: T) => React.ReactNode; }"
+      ]
+    },
+    {
+      "id": "ts-no-explicit-any",
+      "description": "Avoid explicit any; prefer unknown with type guards or proper generics",
+      "forbiddenPatterns": [
+        "(:|<)\\s*any(\\b|\\s|,|\\)|>|])"
+      ],
+      "hintPaths": [
+        "src/**/*.{ts,tsx}"
+      ],
+      "examples": [
+        "function parse(input: unknown) { /* ... */ }",
+        "function map<T>(items: T[]): T[] { return items; }"
+      ],
+      "severity": "info"
+    },
+    {
+      "id": "react-usecallback-optimization",
+      "description": "Always wrap functions in useCallback when they are passed as props, used in hook dependencies, or contain complex logic",
+      "hintPaths": [
+        "src/components/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "const handleClick = useCallback(() => { /* logic */ }, [dependencies]);",
+        "const switchLocale = useCallback(() => { /* navigation */ }, [pathname, router]);",
+        "const fetchData = useCallback(async () => { /* API call */ }, [params]);"
+      ]
+    },
+    {
+      "id": "react-usememo-optimization",
+      "description": "Use useMemo for expensive calculations, data transformations, filtering/sorting large arrays, and objects passed as props",
+      "hintPaths": [
+        "src/components/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "const expensiveValue = useMemo(() => heavyCalculation(data), [data]);",
+        "const filteredItems = useMemo(() => items.filter(item => item.active), [items]);",
+        "const contextValue = useMemo(() => ({ user, updateUser: setUser }), [user]);"
+      ]
+    },
+    {
+      "id": "react-memo-optimization",
+      "description": "Use React.memo for components that re-render frequently with the same props or contain expensive rendering logic",
+      "hintPaths": [
+        "src/components/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "const ExpensiveComponent = React.memo(({ data, onAction }) => { return <div>{/* heavy rendering */}</div>; });"
+      ]
+    },
+    {
+      "id": "api-errors-handling-hint",
+      "description": "Handle errors explicitly in API calls; avoid swallowing exceptions; no sensitive data in logs",
+      "hintPaths": [
+        "src/**/*.{ts,tsx}"
+      ]
+    },
+    {
+      "id": "next-data-fetching-hint",
+      "description": "Prefer Server Components for data fetching; control cache via fetch options (cache, next.revalidate)",
+      "hintPaths": [
+        "app/**/*.{tsx,ts}",
+        "src/**/*.{tsx,ts}"
+      ],
+      "examples": [
+        "await fetch(url, { cache: 'no-store' })",
+        "await fetch(url, { next: { revalidate: 3600 } })"
+      ]
+    },
+    {
+      "id": "accessibility-hint",
+      "description": "Ensure accessible names (aria-label/aria-labelledby), proper roles, focus management, and alt text on images",
+      "hintPaths": [
+        "src/**/*.{tsx,ts}"
+      ]
+    },
+    {
+      "id": "lint-format-hint",
+      "description": "Keep ESLint clean in CI; Prettier formatting; import order: builtin, external, internal (separate groups by blank line)",
+      "hintPaths": [
+        "**/*"
+      ]
+    },
+    {
+      "id": "no-redundant-comments",
+      "description": "Avoid obvious/redundant comments that restate the code; prefer comments that explain 'why', not 'what'",
+      "hintPaths": [
+        "src/**/*.{ts,tsx}"
+      ],
+      "examples": [
+        "const count = count + 1; // Bad: increments count",
+        "// Good: Using +1 to avoid off-by-one when moving to the next page in pagination"
+      ],
+      "severity": "info"
     },
     {
       "id": "allow-explicit-override",
       "description": "Allow modification if explicit override marker present",
-      "allowedPatterns": ["// AI:ALLOW_MODIFY"],
+      "allowedPatterns": [
+        "// AI:ALLOW_MODIFY"
+      ],
       "severity": "info"
+    },
+    {
+      "id": "avoid-useless-useMemo-module-constants",
+      "title": "Не использовать useMemo для модульных констант",
+      "severity": "warning",
+      "appliesTo": ["*.ts", "*.tsx"],
+      "description": "Не оборачивайте в useMemo значения, объявленные на уровне модуля (вне компонента) и не зависящие от пропсов/состояния. Их ссылка стабильна по определению.",
+      "examples": {
+        "bad": [
+          "const items = [1,2,3]; function C(){ const memo = useMemo(() => items, []); return <div/>; }"
+        ],
+        "good": [
+          "const items = [1,2,3]; function C(){ return <div/>; }",
+          "const base = [1,2,3]; function C(){ const sorted = useMemo(() => [...base].sort(), []); return <div/>; }"
+        ]
+      },
+      "hints": [
+        "Используйте модульную константу напрямую.",
+        "Если нужна производная структура — мемоизируйте вычисление (фильтрация/сортировка), а не исходную константу."
+      ]
     }
   ]
 }
-

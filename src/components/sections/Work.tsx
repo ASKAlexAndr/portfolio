@@ -1,12 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FaGithub } from "react-icons/fa6";
 import { site } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-const reanimated = [
+interface ReanimatedComponent {
+  i18n: { title: string; desc: string };
+  tech: string[];
+  link: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+}
+
+type CardBase = { tech: string[]; link?: string };
+type I18nCard = CardBase & { i18n: { title: string; desc: string } };
+type PlainCard = CardBase & { title: string; description: string };
+type Card = I18nCard | PlainCard;
+
+const reanimated: ReanimatedComponent[] = [
   {
     i18n: { title: "work.components.scratch.title", desc: "work.components.scratch.desc" },
     tech: ["Reanimated", "Gesture Handler", "SVG"],
@@ -24,12 +42,7 @@ const reanimated = [
   },
 ];
 
-type CardBase = { tech: string[]; link?: string };
-type I18nCard = CardBase & { i18n: { title: string; desc: string } };
-type PlainCard = CardBase & { title: string; description: string };
-type Card = I18nCard | PlainCard;
-
-const projects: Card[] = [
+const projects: Project[] = [
   { title: "[PROJECT_1_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
   { title: "[PROJECT_2_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
   { title: "[PROJECT_3_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
@@ -38,9 +51,16 @@ const projects: Card[] = [
 export default function Work() {
   const [tab, setTab] = useState<"components" | "projects">("components");
   const { t } = useTranslation();
+  const pathname = usePathname();
+
+  // Мемоизируем данные в зависимости от выбранной вкладки
+  const currentData = useMemo(() => 
+    tab === "components" ? (reanimated as Card[]) : (projects as Card[]),
+    [tab]
+  );
 
   return (
-    <section id="work" className="mx-auto max-w-6xl px-4 mt-16">
+    <section id="work" className="mx-auto max-w-6xl px-4 mt-16" key={pathname}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">{t("work.title")}</h2>
         <div className="flex items-center gap-4">
@@ -73,7 +93,7 @@ export default function Work() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {(tab === "components" ? (reanimated as Card[]) : (projects as Card[])).map((card, i) => (
+        {currentData.map((card, i) => (
           <motion.a
             key={("i18n" in card ? card.i18n.title : card.title)}
             href={card.link || "#"}
