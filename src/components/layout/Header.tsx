@@ -30,6 +30,9 @@ export function Header() {
   }, []);
 
   const switchLocale = () => {
+    // Сохраняем текущую позицию скролла
+    const scrollPosition = window.scrollY;
+    
     const currentPath = pathname || "/";
     const segments = currentPath.split("/").filter(Boolean);
     const first = segments[0];
@@ -48,9 +51,19 @@ export function Header() {
     const toRu = `${toRuBase}${search}${hash}`;
     const toEn = `${toEnBase}${search}${hash}`;
 
-    if (first === "ru") router.push(toEn);
-    else router.push(toRu);
+    if (first === "ru") {
+      router.push(toEn);
+    } else {
+      router.push(toRu);
+    }
+
+    // Восстанавливаем позицию скролла после перехода
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 100);
   };
+
+  const currentLang = pathname?.startsWith("/ru") ? "ru" : "en";
 
   return (
     <motion.header
@@ -82,7 +95,7 @@ export function Header() {
             className="glass-card px-3 py-2 flex items-center gap-2 hover:shadow-lg cursor-pointer select-none"
           >
             <Languages size={18} />
-            <span className="hidden sm:inline">{pathname?.startsWith("/ru") ? "RU" : "EN"}</span>
+            <span className="hidden sm:inline">{t(`languages.${currentLang}`)}</span>
           </button>
           <button
             className="md:hidden glass-card p-2"

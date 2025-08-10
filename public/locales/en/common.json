@@ -1,5 +1,6 @@
 {
   "nav": {"about": "About", "skills": "Skills", "work": "Work", "contact": "Contact"},
+  "languages": {"ru": "RU", "en": "EN"},
   "hero": {
     "subtitle": "Senior React Native Developer",
     "tagline": "Creating high-performance mobile apps with beautiful motion and clean architecture.",
@@ -9,15 +10,15 @@
   "skills": { "title": "Skills" },
   "work": {
     "title": "Work",
-    "tabs": { "components": "Reanimated Components", "projects": "Mobile Projects" },
+    "tabs": { "components": "Components", "projects": "Projects" },
     "components": {
       "scratch": {
         "title": "Scratch-off Banner",
         "desc": "SVG + Reanimated + Gesture Handler interactive scratch effect."
       },
       "recycled": {
-        "title": "Recycled Carousel",
-        "desc": "Infinite recycled carousel with virtualization for performance."
+        "title": "Infinite Carousel",
+        "desc": "Infinite recycled carousel for performance optimization"
       },
       "tear": {
         "title": "Tear-off Banner",
@@ -31,8 +32,17 @@
     "email": "Email",
     "message": "Message",
     "send": "Send",
-    "cv_en": "Download CV (EN)",
-    "cv_ru": "Download CV (RU)"
+    "subtitle": "Ready for new projects and interesting opportunities. Let's discuss your ideas!",
+    "contactMe": "Contact Me",
+    "aboutWork": "About Work",
+    "availability": "Open to opportunities",
+    "responseTime": "Response Time",
+    "within24h": "Within 24 hours",
+    "specialization": "Specialization",
+    "yearsExp": "Years Experience",
+    "projects": "Projects",
+    "bestTime": "Best Time to Contact",
+    "workHours": "Weekdays 9AM-6PM"
   },
   "footer": { "made": "Made with AI" },
   "about": {

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaGithub } from "react-icons/fa6";
+import { site } from "@/lib/utils";
 
 const reanimated = [
   {
@@ -41,21 +43,32 @@ export default function Work() {
     <section id="work" className="mx-auto max-w-6xl px-4 mt-16">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">{t("work.title")}</h2>
-        <div className="glass-card p-1 rounded-lg inline-flex">
-          <button
-            className={`px-3 py-2 rounded-md ${
-              tab === "components" ? "bg-white/10" : ""
-            }`}
-            onClick={() => setTab("components")}
+        <div className="flex items-center gap-4">
+          <a
+            href={`https://github.com/${site.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-card p-2 hover:bg-white/10 transition-colors"
+            title="View GitHub Profile"
           >
-            {t("work.tabs.components")}
-          </button>
-          <button
-            className={`px-3 py-2 rounded-md ${tab === "projects" ? "bg-white/10" : ""}`}
-            onClick={() => setTab("projects")}
-          >
-            {t("work.tabs.projects")}
-          </button>
+            <FaGithub size={20} />
+          </a>
+          <div className="glass-card p-1 rounded-lg inline-flex">
+            <button
+              className={`px-3 py-2 rounded-md ${
+                tab === "components" ? "bg-white/10" : ""
+              }`}
+              onClick={() => setTab("components")}
+            >
+              {t("work.tabs.components")}
+            </button>
+            <button
+              className={`px-3 py-2 rounded-md ${tab === "projects" ? "bg-white/10" : ""}`}
+              onClick={() => setTab("projects")}
+            >
+              {t("work.tabs.projects")}
+            </button>
+          </div>
         </div>
       </div>
 

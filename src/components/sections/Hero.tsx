@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import CVDownloadButton from "@/components/ui/CVDownloadButton";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ export default function Hero() {
           className="flex gap-3 mt-2"
         >
           <a href="#work" className="neon-button">{t("hero.viewWork")}</a>
-          <a href="/cv/cv-en.pdf" className="glass-card px-4 py-3">{t("hero.downloadCV")}</a>
+          <CVDownloadButton />
         </motion.div>
       </div>
     </section>
