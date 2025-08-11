@@ -1,9 +1,10 @@
 {
   "nav": {"about": "About", "skills": "Skills", "work": "Work", "contact": "Contact"},
   "languages": {"ru": "RU", "en": "EN"},
+  "developerName": "Alexandr Korotkov",
   "hero": {
     "subtitle": "Senior React Native Developer",
-    "tagline": "Creating high-performance mobile apps with beautiful motion and clean architecture.",
+    "tagline": "Creating smooth, responsive and high-performance mobile applications. Expert in React Native, TypeScript, and Reanimated.",
     "viewWork": "View Work",
     "downloadCV": "Download CV"
   },
@@ -85,12 +86,12 @@
     "availability": "Status",
     "availabilityValue": "Open to opportunities",
     "expertise": "Experience & Expertise",
-    "mobileDev": "Mobile Development",
-    "mobileDesc": "React Native, iOS, Android",
-    "architecture": "Architecture",
-    "archDesc": "Clean Architecture, Performance",
-    "teamwork": "Team Collaboration",
-    "teamDesc": "Code Review, CI/CD, Mentoring"
+    "mobileDev": "Development",
+    "mobileDesc": "React Native, Native Modules, App Store Publishing",
+    "architecture": "Leadership",
+    "archDesc": "Clean Architecture, Performance Optimization, Scalable Solutions",
+    "teamwork": "Processes",
+    "teamDesc": "Code Review, CI/CD, Testing, Mentoring"
   }
 }
 

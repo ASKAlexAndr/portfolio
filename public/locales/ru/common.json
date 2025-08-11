@@ -1,9 +1,10 @@
 {
   "nav": {"about": "Обо мне", "skills": "Навыки", "work": "Проекты", "contact": "Контакты"},
   "languages": {"ru": "RU", "en": "EN"},
+  "developerName": "Александр Коротков",
   "hero": {
     "subtitle": "Senior React Native разработчик",
-    "tagline": "Создаю высокопроизводительные мобильные приложения с красивыми анимациями и чистой архитектурой.",
+    "tagline": "Создаю плавные, отзывчивые и высокопроизводительные мобильные приложения. Эксперт в React Native, TypeScript и Reanimated.",
     "viewWork": "Портфолио",
     "downloadCV": "Скачать резюме"
   },
@@ -87,12 +88,12 @@
     "availability": "Статус",
     "availabilityValue": "Открыт к предложениям",
     "expertise": "Опыт и экспертиза",
-    "mobileDev": "Мобильная разработка",
-    "mobileDesc": "React Native, iOS, Android",
-    "architecture": "Архитектура",
-    "archDesc": "Clean Architecture, Performance",
-    "teamwork": "Командная работа",
-    "teamDesc": "Code Review, CI/CD, Mentoring"
+    "mobileDev": "Разработка",
+    "mobileDesc": "React Native, Нативные модули, Публикация в сторах",
+    "architecture": "Лидерство",
+    "archDesc": "Clean Architecture, Оптимизация производительности, Масштабируемые решения",
+    "teamwork": "Процессы",
+    "teamDesc": "Code Review, CI/CD, Тестирование, Менторинг"
   }
 }
 
