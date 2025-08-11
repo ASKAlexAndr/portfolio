@@ -18,15 +18,14 @@ async function generatePDF(htmlFile, outputFile, language = null) {
     // Загружаем HTML файл
     await page.goto(htmlUrl, { waitUntil: 'networkidle0' });
     
-    // Если указан язык, переключаемся на него
+    // Если указан язык, устанавливаем его через URL
     if (language) {
-      await page.evaluate((lang) => {
-        const langBtn = document.querySelector(`[data-lang="${lang}"]`);
-        if (langBtn) langBtn.click();
-      }, language);
+      await page.goto(`${htmlUrl}?lang=${language}`, { waitUntil: 'networkidle0' });
       
-      // Ждем переключения языка
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Ждем загрузки контента
+      await page.waitForFunction(() => {
+        return !document.querySelector('.loading') && document.querySelector('header');
+      }, { timeout: 10000 });
     }
 
     // Генерируем PDF
@@ -57,11 +56,11 @@ async function generatePDF(htmlFile, outputFile, language = null) {
 async function generateAllPDFs() {
   console.log('🚀 Начинаю генерацию PDF файлов из мультиязычного HTML...');
   
-  // Генерируем русскую версию
-  await generatePDF('cv.html', 'cv-ru.pdf', 'ru');
-  
-  // Генерируем английскую версию
-  await generatePDF('cv.html', 'cv-en.pdf', 'en');
+      // Генерируем русскую версию
+    await generatePDF('cv.html', 'cv-ru.pdf', 'ru');
+    
+    // Генерируем английскую версию
+    await generatePDF('cv.html', 'cv-en.pdf', 'en');
   
   console.log('🎉 Генерация PDF файлов завершена!');
 }

@@ -110,14 +110,6 @@
 
     .muted{color:var(--muted);font-size:13px}
 
-    .lang-content {
-      display: none;
-    }
-
-    .lang-content.active {
-      display: block;
-    }
-
     @media print{
       body{padding:0}
       a{text-decoration:none;color:inherit}
@@ -134,272 +126,396 @@
   </div>
 
   <div class="container" role="document">
-    <!-- Russian Content -->
-    <div class="lang-content active" data-lang="ru">
-      <header>
-        <div class="head-left">
-          <div class="avatar">АК</div>
-          <div class="meta">
-            <h1>Александр Коротков</h1>
-            <div class="role">Senior React Native Engineer</div>
-            <div class="muted">6+ лет опыта</div>
-          </div>
-        </div>
-        <div class="contact">
-          <a href="mailto:ask.97.alexandr@gmail.com">ask.97.alexandr@gmail.com</a>
-          <a href="https://linkedin.com/in/alexandr-korotkov-rn" target="_blank">linkedin.com/in/alexandr-korotkov-rn</a>
-          <a href="https://github.com/ASKAlexAndr" target="_blank">github.com/ASKAlexAndr</a>
-        </div>
-      </header>
-
-      <section>
-        <h2>Профессиональное резюме</h2>
-        <p class="summary">Опытный Senior React Native Engineer с 6+ годами опыта в создании плавных,
-          производительных мобильных приложений с богатыми анимациями и микро-взаимодействиями. Глубокое знание
-          React Native, TypeScript и Reanimated, с практическим опытом создания сложных
-          интерактивных инструментов и анимаций.</p>
-      </section>
-
-      <section>
-        <h2>Ключевые компетенции</h2>
-        <div class="skills">
-          <span class="skill">React Native</span>
-          <span class="skill">TypeScript</span>
-          <span class="skill">Reanimated</span>
-          <span class="skill">Gesture Handler</span>
-          <span class="skill">Native/Turbo Modules</span>
-          <span class="skill">Performance</span>
-          <span class="skill">CI / CD</span>
-          <span class="skill">Detox / Unit tests</span>
-        </div>
-      </section>
-
-      <section>
-        <h2>Профессиональный опыт</h2>
-        <div class="experience">
-          <article class="job">
-            <div class="title"><a href="https://kuper.ru" target="_blank">Kuper</a> — Senior React Native Developer</div>
-            <div class="meta">Июнь 2023 — Настоящее время (2+ года)</div>
-            <ul>
-              <li>Руководил мобильной разработкой в рекламной сфере, контролировал архитектурные решения, стандарты качества кода и планирование технической дорожной карты.</li>
-              <li>Реализовал сложные интерактивные инструменты, включая баннеры с отрываемыми и стираемыми слоями, используя Reanimated + Gesture Handler + SVG с точной синхронизацией касаний.</li>
-              <li>Разработал рекламный SDK для React Native приложений, фокусируясь на плавных анимациях и вовлечении пользователей.</li>
-              <li>Создал производительные системы анимации, поддерживающие 60fps на различных типах устройств.</li>
-              <li>Установил культуру тестирования, написав комплексные Unit и Detox тесты.</li>
-              <li>Настроил CI/CD пайплайны для автоматизированного тестирования и развертывания.</li>
-              <li>Интегрировал утилиту для автоматической генерации Zod TypeScript схем из OpenAPI схем бэкенда, улучшив типобезопасность и сократив ручное обслуживание кода.</li>
-              <li>Тесно сотрудничал с дизайн-командами для перевода концепций анимации в продакшн-готовый код.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://2people.io" target="_blank">2people IT</a> — Software Engineer</div>
-            <div class="meta">Декабрь 2021 — Май 2023 (1 год 6 месяцев)</div>
-            <ul>
-              <li>Разрабатывал мобильные и веб-приложения, используя React и React Native.</li>
-              <li>Создавал кастомные нативные компоненты и модули, включая медиа-пикер и редактор изображений.</li>
-              <li>Фокусировался на бесшовном пользовательском опыте с плавными переходами и взаимодействиями.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://prominado.ru" target="_blank">Prominado</a> — React Native Developer</div>
-            <div class="meta">Февраль 2020 — Декабрь 2021 (1 год 11 месяцев)</div>
-            <ul>
-              <li>Разрабатывал приложения с нуля, доставляя полностью функциональные продукты клиентам.</li>
-              <li>Интегрировал платежные системы, карты, push-уведомления и другие важные сервисы, повышая удобство взаимодействия с приложением.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://labmedia.su" target="_blank">Labmedia</a> — Web Software Developer</div>
-            <div class="meta">Сентябрь 2018 — Сентябрь 2019 (1 год 1 месяц)</div>
-            <ul>
-              <li>Разрабатывал мультимедийные образовательные приложения на платформе WebTutor.</li>
-              <li>Создал многопользовательскую браузерную игру, используя Vue и Python Tornado.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>Образование</h2>
-        <div><strong>Ярославский государственный университет им. П.Г. Демидова</strong></div>
-        <div class="muted">Бакалавр, Вычислительная и прикладная математика (2015 — 2020)</div>
-      </section>
-
-      <section class="achievements">
-        <h2>Ключевые достижения</h2>
-        <ul>
-          <li><strong>Сложные системы анимации:</strong> Успешно реализовал анимации отрываемых и стираемых баннеров с точной синхронизацией касаний.</li>
-          <li><strong>Разработка SDK:</strong> Разработал рекламный SDK для React Native приложений.</li>
-          <li><strong>Производительность:</strong> Постоянно обеспечивал плавные 60fps анимации на различных типах устройств.</li>
-          <li><strong>Кросс-платформенная экспертиза:</strong> Разрабатывал нативные модули на Swift и Kotlin и интегрировал их в React Native приложения.</li>
-          <li><strong>Лидерство:</strong> Руководил инициативами мобильной разработки и менторил junior и middle разработчиков.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Языки</h2>
-        <div class="muted">Английский — Профессиональный рабочий уровень</div>
-        <div class="muted">Русский — Родной</div>
-      </section>
-    </div>
-
-    <!-- English Content -->
-    <div class="lang-content" data-lang="en">
-      <header>
-        <div class="head-left">
-          <div class="avatar">AK</div>
-          <div class="meta">
-            <h1>Alexandr Korotkov</h1>
-            <div class="role">Senior React Native Engineer</div>
-            <div class="muted">6+ years</div>
-          </div>
-        </div>
-        <div class="contact">
-          <a href="mailto:ask.97.alexandr@gmail.com">ask.97.alexandr@gmail.com</a>
-          <a href="https://linkedin.com/in/alexandr-korotkov-rn" target="_blank">linkedin.com/in/alexandr-korotkov-rn</a>
-          <a href="https://github.com/ASKAlexAndr" target="_blank">github.com/ASKAlexAndr</a>
-        </div>
-      </header>
-
-      <section>
-        <h2>Professional summary</h2>
-        <p class="summary">Experienced Senior React Native Engineer with 6+ years of expertise in creating fluid,
-          performant mobile applications with rich animations and micro-interactions. Deep proficiency in
-          React Native, TypeScript, and Reanimated, with hands-on experience building complex
-          interactive tools and animation systems. Passionate about translating motion-rich designs into
-          production-grade interfaces that deliver exceptional user experiences.</p>
-      </section>
-
-      <section>
-        <h2>Core expertise</h2>
-        <div class="skills">
-          <span class="skill">React Native</span>
-          <span class="skill">TypeScript</span>
-          <span class="skill">Reanimated</span>
-          <span class="skill">Gesture Handler</span>
-          <span class="skill">Native/Turbo Modules</span>
-          <span class="skill">Performance</span>
-          <span class="skill">CI / CD</span>
-          <span class="skill">Detox / Unit tests</span>
-        </div>
-      </section>
-
-      <section>
-        <h2>Professional experience</h2>
-        <div class="experience">
-          <article class="job">
-            <div class="title"><a href="https://kuper.ru" target="_blank">Kuper</a> — Senior React Native Developer</div>
-            <div class="meta">June 2023 — Present (2+ years)</div>
-            <ul>
-              <li>Led mobile development in advertising domain, overseeing architecture decisions, code quality standards, and technical roadmap planning.</li>
-              <li>Implemented complex interactive tools including banners with tear-off and scratch-off layers using Reanimated + Gesture Handler + SVG with precise touch synchronization.</li>
-              <li>Developed advertising SDK for React Native applications, focusing on smooth animations and user engagement.</li>
-              <li>Built performant animation systems that maintained 60fps across various device types.</li>
-              <li>Established testing culture by writing comprehensive Unit and Detox tests.</li>
-              <li>Configured CI/CD pipelines for automated testing and deployment.</li>
-              <li>Integrated a utility for auto-generating Zod TypeScript schemas from backend OpenAPI schemas, improving type safety and reducing manual code maintenance.</li>
-              <li>Collaborated closely with design teams to translate motion concepts into production-ready code.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://2people.io" target="_blank">2people IT</a> — Software Engineer</div>
-            <div class="meta">December 2021 — May 2023 (1 year 6 months)</div>
-            <ul>
-              <li>Developed mobile and web applications using React and React Native.</li>
-              <li>Built custom native components and modules including media picker and image editor.</li>
-              <li>Focused on seamless user experiences with smooth transitions and interactions.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://prominado.ru" target="_blank">Prominado</a> — React Native Developer</div>
-            <div class="meta">February 2020 — December 2021 (1 year 11 months)</div>
-            <ul>
-              <li>Developed applications from scratch, delivering fully functional products to clients.</li>
-              <li>Integrated payment systems, maps, push notifications, and other essential services, increasing app usability.</li>
-            </ul>
-          </article>
-          <article class="job">
-            <div class="title"><a href="https://labmedia.su" target="_blank">Labmedia</a> — Web Software Developer</div>
-            <div class="meta">September 2018 — September 2019 (1 year 1 month)</div>
-            <ul>
-              <li>Developed multimedia educational applications on WebTutor platform.</li>
-              <li>Created multiplayer browser game using Vue and Python Tornado.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>Education</h2>
-        <div><strong>Yaroslavl Demidov State University</strong></div>
-        <div class="muted">Bachelor's degree, Computational and Applied Mathematics (2015 — 2020)</div>
-      </section>
-
-      <section class="achievements">
-        <h2>Key Achievements</h2>
-        <ul>
-          <li><strong>Complex Animation Systems:</strong> Successfully implemented tear-off and scratch-off banner animations with precise touch synchronization.</li>
-          <li><strong>SDK Development:</strong> Built advertising SDK for React Native applications.</li>
-          <li><strong>Performance Excellence:</strong> Consistently delivered smooth 60fps animations across various device types.</li>
-          <li><strong>Cross-Platform Expertise:</strong> Developed native modules in Swift and Kotlin and integrated them into React Native applications.</li>
-          <li><strong>Team Leadership:</strong> Led mobile development initiatives and mentored junior and middle developers.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Languages</h2>
-        <div class="muted">English — Professional working proficiency</div>
-        <div class="muted">Russian — Native</div>
-      </section>
-    </div>
+    <!-- Контент будет загружен динамически -->
   </div>
 
   <script>
-    // Language switching functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    // Встроенный контент из content.json
+    const contentData = {
+  "ru": {
+    "title": "Александр Коротков — Резюме",
+    "header": {
+      "name": "Александр Коротков",
+      "role": "Senior React Native Engineer",
+      "experience": "6+ лет опыта",
+      "avatar": "АК"
+    },
+    "contact": {
+      "email": "ask.97.alexandr@gmail.com",
+      "linkedin": "linkedin.com/in/alexandr-korotkov-rn",
+      "github": "github.com/ASKAlexAndr"
+    },
+    "sections": {
+      "summary": {
+        "title": "Обо мне",
+        "content": "Опытный Senior React Native Engineer с 6+ годами опыта в создании плавных, производительных мобильных приложений. Глубокое понимание React Native, TypeScript и Reanimated, с практическим опытом создания сложных интерактивных инструментов и анимаций."
+      },
+      "skills": {
+        "title": "Ключевые компетенции",
+        "items": [
+          "React Native",
+          "TypeScript",
+          "Reanimated",
+          "Gesture Handler",
+          "Native/Turbo Modules",
+          "Performance",
+          "CI / CD",
+          "Detox / Unit tests"
+        ]
+      },
+      "experience": {
+        "title": "Профессиональный опыт",
+        "jobs": [
+          {
+            "company": "Kuper",
+            "url": "https://kuper.ru",
+            "position": "Senior React Native Developer",
+            "period": "Июнь 2023 — Настоящее время (2+ года)",
+            "responsibilities": [
+              "Руководил мобильной разработкой в рекламной сфере, контролировал архитектурные решения, стандарты качества кода и планирование технической дорожной карты.",
+              "Реализовал сложные интерактивные инструменты, включая баннеры с отрываемыми и стираемыми слоями, используя Reanimated + Gesture Handler + SVG с точной синхронизацией касаний.",
+              "Разработал рекламный SDK для React Native приложений, фокусируясь на плавных анимациях и вовлечении пользователей.",
+              "Создал производительные системы анимации, поддерживающие 60fps на различных типах устройств.",
+              "Установил культуру тестирования, написав комплексные Unit и Detox тесты.",
+              "Настроил CI/CD пайплайны для автоматизированного тестирования и развертывания.",
+              "Интегрировал утилиту для автоматической генерации Zod TypeScript схем из OpenAPI схем бэкенда, улучшив типобезопасность и сократив ручное обслуживание кода.",
+              "Тесно сотрудничал с дизайн-командами для перевода концепций анимации в продакшн-готовый код."
+            ]
+          },
+          {
+            "company": "2people IT",
+            "url": "https://2people.io",
+            "position": "Software Engineer",
+            "period": "Декабрь 2021 — Май 2023 (1 год 6 месяцев)",
+            "responsibilities": [
+              "Разрабатывал мобильные и веб-приложения, используя React и React Native.",
+              "Создавал кастомные нативные компоненты и модули, включая медиа-пикер и редактор изображений.",
+              "Фокусировался на бесшовном пользовательском опыте с плавными переходами и взаимодействиями."
+            ]
+          },
+          {
+            "company": "Prominado",
+            "url": "https://prominado.ru",
+            "position": "React Native Developer",
+            "period": "Февраль 2020 — Декабрь 2021 (1 год 11 месяцев)",
+            "responsibilities": [
+              "Разрабатывал приложения с нуля, доставляя полностью функциональные продукты клиентам.",
+              "Интегрировал платежные системы, карты, push-уведомления и другие важные сервисы, повышая удобство взаимодействия с приложением."
+            ]
+          },
+          {
+            "company": "Labmedia",
+            "url": "https://labmedia.su",
+            "position": "Web Software Developer",
+            "period": "Сентябрь 2018 — Сентябрь 2019 (1 год 1 месяц)",
+            "responsibilities": [
+              "Разрабатывал мультимедийные образовательные приложения на платформе WebTutor.",
+              "Создал многопользовательскую браузерную игру, используя Vue и Python Tornado."
+            ]
+          }
+        ]
+      },
+      "education": {
+        "title": "Образование",
+        "institution": "Ярославский государственный университет им. П.Г. Демидова",
+        "degree": "Бакалавр, Вычислительная и прикладная математика",
+        "period": "2015 — 2020"
+      },
+      "achievements": {
+        "title": "Ключевые достижения",
+        "items": [
+          {
+            "title": "Сложные системы анимации",
+            "description": "Успешно реализовал анимации отрываемых и стираемых баннеров с точной синхронизацией касаний."
+          },
+          {
+            "title": "Разработка SDK",
+            "description": "Разработал рекламный SDK для React Native приложений."
+          },
+          {
+            "title": "Отличная производительность",
+            "description": "Постоянно обеспечивал плавные 60fps анимации на различных типах устройств."
+          },
+          {
+            "title": "Кросс-платформенная экспертиза",
+            "description": "Разрабатывал нативные модули на Swift и Kotlin и интегрировал их в React Native приложения."
+          },
+          {
+            "title": "Лидерство",
+            "description": "Руководил инициативами мобильной разработки и менторил junior и middle разработчиков."
+          }
+        ]
+      },
+      "languages": {
+        "title": "Языки",
+        "items": [
+          {
+            "name": "Английский",
+            "level": "Профессиональный рабочий уровень"
+          },
+          {
+            "name": "Русский",
+            "level": "Родной"
+          }
+        ]
+      }
+    }
+  },
+  "en": {
+    "title": "Alexandr Korotkov — CV",
+    "header": {
+      "name": "Alexandr Korotkov",
+      "role": "Senior React Native Engineer",
+      "experience": "6+ years",
+      "avatar": "AK"
+    },
+    "contact": {
+      "email": "ask.97.alexandr@gmail.com",
+      "linkedin": "linkedin.com/in/alexandr-korotkov-rn",
+      "github": "github.com/ASKAlexAndr"
+    },
+    "sections": {
+      "summary": {
+        "title": "Summary",
+        "content": "Experienced Senior React Native Engineer with 6+ years of expertise in creating fluid, performant mobile applications with rich animations and micro-interactions. Deep proficiency in React Native, TypeScript, and Reanimated, with hands-on experience building complex interactive tools and animation systems. Passionate about translating motion-rich designs into production-grade interfaces that deliver exceptional user experiences."
+      },
+      "skills": {
+        "title": "Core expertise",
+        "items": [
+          "React Native",
+          "TypeScript",
+          "Reanimated",
+          "Gesture Handler",
+          "Native/Turbo Modules",
+          "Performance",
+          "CI / CD",
+          "Detox / Unit tests"
+        ]
+      },
+      "experience": {
+        "title": "Professional experience",
+        "jobs": [
+          {
+            "company": "Kuper",
+            "url": "https://kuper.ru",
+            "position": "Senior React Native Developer",
+            "period": "June 2023 — Present (2+ years)",
+            "responsibilities": [
+              "Led mobile development in advertising domain, overseeing architecture decisions, code quality standards, and technical roadmap planning.",
+              "Implemented complex interactive tools including banners with tear-off and scratch-off layers using Reanimated + Gesture Handler + SVG with precise touch synchronization.",
+              "Developed advertising SDK for React Native applications, focusing on smooth animations and user engagement.",
+              "Built performant animation systems that maintained 60fps across various device types.",
+              "Established testing culture by writing comprehensive Unit and Detox tests.",
+              "Configured CI/CD pipelines for automated testing and deployment.",
+              "Integrated a utility for auto-generating Zod TypeScript schemas from backend OpenAPI schemas, improving type safety and reducing manual code maintenance.",
+              "Collaborated closely with design teams to translate motion concepts into production-ready code."
+            ]
+          },
+          {
+            "company": "2people IT",
+            "url": "https://2people.io",
+            "position": "Software Engineer",
+            "period": "December 2021 — May 2023 (1 year 6 months)",
+            "responsibilities": [
+              "Developed mobile and web applications using React and React Native.",
+              "Built custom native components and modules including media picker and image editor.",
+              "Focused on seamless user experiences with smooth transitions and interactions."
+            ]
+          },
+          {
+            "company": "Prominado",
+            "url": "https://prominado.ru",
+            "position": "React Native Developer",
+            "period": "February 2020 — December 2021 (1 year 11 months)",
+            "responsibilities": [
+              "Developed applications from scratch, delivering fully functional products to clients.",
+              "Integrated payment systems, maps, push notifications, and other essential services, increasing app usability."
+            ]
+          },
+          {
+            "company": "Labmedia",
+            "url": "https://labmedia.su",
+            "position": "Web Software Developer",
+            "period": "September 2018 — September 2019 (1 year 1 month)",
+            "responsibilities": [
+              "Developed multimedia educational applications on WebTutor platform.",
+              "Created multiplayer browser game using Vue and Python Tornado."
+            ]
+          }
+        ]
+      },
+      "education": {
+        "title": "Education",
+        "institution": "Yaroslavl Demidov State University",
+        "degree": "Bachelor's degree, Computational and Applied Mathematics",
+        "period": "2015 — 2020"
+      },
+      "achievements": {
+        "title": "Key Achievements",
+        "items": [
+          {
+            "title": "Complex Animation Systems",
+            "description": "Successfully implemented tear-off and scratch-off banner animations with precise touch synchronization."
+          },
+          {
+            "title": "SDK Development",
+            "description": "Built advertising SDK for React Native applications."
+          },
+          {
+            "title": "Performance Excellence",
+            "description": "Consistently delivered smooth 60fps animations across various device types."
+          },
+          {
+            "title": "Cross-Platform Expertise",
+            "description": "Developed native modules in Swift and Kotlin and integrated them into React Native applications."
+          },
+          {
+            "title": "Team Leadership",
+            "description": "Led mobile development initiatives and mentored junior and middle developers."
+          }
+        ]
+      },
+      "languages": {
+        "title": "Languages",
+        "items": [
+          {
+            "name": "English",
+            "level": "Professional working proficiency"
+          },
+          {
+            "name": "Russian",
+            "level": "Native"
+          }
+        ]
+      }
+    }
+  }
+};
+
+    let currentLang = 'ru';
+
+    // Рендерим контент для выбранного языка
+    function renderContent(lang) {
+      if (!contentData || !contentData[lang]) {
+        console.error('Контент для языка', lang, 'не найден');
+        return;
+      }
+
+      const content = contentData[lang];
+      
+      // Обновляем заголовок страницы
+      document.title = content.title;
+      document.documentElement.lang = lang;
+
+      // Рендерим HTML
+      const container = document.querySelector('.container');
+      container.innerHTML = `
+        <header>
+          <div class="head-left">
+            <div class="avatar">${content.header.avatar}</div>
+            <div class="meta">
+              <h1>${content.header.name}</h1>
+              <div class="role">${content.header.role}</div>
+              <div class="muted">${content.header.experience}</div>
+            </div>
+          </div>
+          <div class="contact">
+            <a href="mailto:${content.contact.email}">${content.contact.email}</a>
+            <a href="https://${content.contact.linkedin}" target="_blank">${content.contact.linkedin}</a>
+            <a href="https://${content.contact.github}" target="_blank">${content.contact.github}</a>
+          </div>
+        </header>
+
+        <section>
+          <h2>${content.sections.summary.title}</h2>
+          <p class="summary">${content.sections.summary.content}</p>
+        </section>
+
+        <section>
+          <h2>${content.sections.skills.title}</h2>
+          <div class="skills">
+            ${content.sections.skills.items.map(skill => `<span class="skill">${skill}</span>`).join('')}
+          </div>
+        </section>
+
+        <section>
+          <h2>${content.sections.experience.title}</h2>
+          <div class="experience">
+            ${content.sections.experience.jobs.map(job => `
+              <article class="job">
+                <div class="title"><a href="${job.url}" target="_blank">${job.company}</a> — ${job.position}</div>
+                <div class="meta">${job.period}</div>
+                <ul>
+                  ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                </ul>
+              </article>
+            `).join('')}
+          </div>
+        </section>
+
+        <section>
+          <h2>${content.sections.education.title}</h2>
+          <div><strong>${content.sections.education.institution}</strong></div>
+          <div class="muted">${content.sections.education.degree} (${content.sections.education.period})</div>
+        </section>
+
+        <section class="achievements">
+          <h2>${content.sections.achievements.title}</h2>
+          <ul>
+            ${content.sections.achievements.items.map(item => `
+              <li><strong>${item.title}:</strong> ${item.description}</li>
+            `).join('')}
+          </ul>
+        </section>
+
+        <section>
+          <h2>${content.sections.languages.title}</h2>
+          ${content.sections.languages.items.map(lang => `
+            <div class="muted">${lang.name} — ${lang.level}</div>
+          `).join('')}
+        </section>
+      `;
+    }
+
+    // Настраиваем переключение языков
+    function setupLanguageSwitcher() {
       const languageBtns = document.querySelectorAll('.language-btn');
-      const langContents = document.querySelectorAll('.lang-content');
       
-      // Get language from URL parameter or default to Russian
-      const urlParams = new URLSearchParams(window.location.search);
-      const defaultLang = urlParams.get('lang') || 'ru';
-      
-      // Set initial language
-      setLanguage(defaultLang);
+      // Устанавливаем активную кнопку
+      languageBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
+      });
       
       languageBtns.forEach(btn => {
         btn.addEventListener('click', function() {
           const lang = this.getAttribute('data-lang');
-          setLanguage(lang);
+          currentLang = lang;
           
-          // Update URL without page reload
+          // Обновляем активную кнопку
+          languageBtns.forEach(b => b.classList.toggle('active', b === this));
+          
+          // Рендерим новый контент
+          renderContent(lang);
+          
+          // Обновляем URL без перезагрузки страницы
           const newUrl = new URL(window.location);
           newUrl.searchParams.set('lang', lang);
           window.history.pushState({}, '', newUrl);
         });
       });
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем язык из URL параметра или используем русский по умолчанию
+      const urlParams = new URLSearchParams(window.location.search);
+      currentLang = urlParams.get('lang') || 'ru';
       
-      function setLanguage(lang) {
-        // Update button states
-        languageBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-        });
-        
-        // Update content visibility
-        langContents.forEach(content => {
-          content.classList.toggle('active', content.getAttribute('data-lang') === lang);
-        });
-        
-        // Update document language
-        document.documentElement.lang = lang;
-        
-        // Update page title
-        const titles = {
-          'ru': 'Александр Коротков — Резюме',
-          'en': 'Alexandr Korotkov — CV'
-        };
-        document.title = titles[lang] || titles['ru'];
-      }
+      // Рендерим контент
+      renderContent(currentLang);
+      
+      // Настраиваем переключение языков
+      setupLanguageSwitcher();
     });
   </script>
 </body>
