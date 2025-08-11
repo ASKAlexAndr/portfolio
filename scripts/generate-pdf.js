@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 
-async function generatePDF(htmlFile, outputFile) {
+async function generatePDF(htmlFile, outputFile, language = null) {
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -13,12 +13,21 @@ async function generatePDF(htmlFile, outputFile) {
     
     // Путь к HTML файлу
     const htmlPath = path.join(__dirname, '../public/cv', htmlFile);
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+    const htmlUrl = `file://${htmlPath}`;
     
-    // Устанавливаем содержимое страницы
-    await page.setContent(htmlContent, {
-      waitUntil: 'networkidle0'
-    });
+    // Загружаем HTML файл
+    await page.goto(htmlUrl, { waitUntil: 'networkidle0' });
+    
+    // Если указан язык, переключаемся на него
+    if (language) {
+      await page.evaluate((lang) => {
+        const langBtn = document.querySelector(`[data-lang="${lang}"]`);
+        if (langBtn) langBtn.click();
+      }, language);
+      
+      // Ждем переключения языка
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
 
     // Генерируем PDF
     const pdfBuffer = await page.pdf({
@@ -46,13 +55,13 @@ async function generatePDF(htmlFile, outputFile) {
 }
 
 async function generateAllPDFs() {
-  console.log('🚀 Начинаю генерацию PDF файлов...');
+  console.log('🚀 Начинаю генерацию PDF файлов из мультиязычного HTML...');
   
   // Генерируем русскую версию
-  await generatePDF('cv-ru.html', 'cv-ru.pdf');
+  await generatePDF('cv.html', 'cv-ru.pdf', 'ru');
   
   // Генерируем английскую версию
-  await generatePDF('cv-en.html', 'cv-en.pdf');
+  await generatePDF('cv.html', 'cv-en.pdf', 'en');
   
   console.log('🎉 Генерация PDF файлов завершена!');
 }
