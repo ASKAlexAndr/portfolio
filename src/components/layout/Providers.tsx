@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
+import type { ReactNode } from "react";
 import { setLanguage } from "@/lib/i18n";
 import { usePathname } from "next/navigation";
 

@@ -4,10 +4,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Languages, Menu } from "lucide-react";
-import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
-import { setLanguage } from "@/lib/i18n";
 
 interface NavItem {
   href: string;
@@ -28,9 +26,8 @@ export function Header() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
 
-  // Мемоизируем текущий язык
-  const currentLang = useMemo(() => 
-    pathname?.startsWith("/ru") ? "ru" : "en", 
+  const currentLang = useMemo(
+    () => (pathname?.startsWith("/ru") ? "ru" : "en"),
     [pathname]
   );
 
@@ -41,27 +38,21 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Принудительно обновляем компонент при смене языка
   useEffect(() => {
-    const handleLanguageChange = () => {
-      // Язык изменился
-    };
-    
-    i18n.on('languageChanged', handleLanguageChange);
+    const handleLanguageChange = () => {};
+    i18n.on("languageChanged", handleLanguageChange);
     return () => {
-      i18n.off('languageChanged', handleLanguageChange);
+      i18n.off("languageChanged", handleLanguageChange);
     };
   }, [i18n]);
 
-  const switchLocale = useCallback(() => {    
-    // Сохраняем текущую позицию скролла
+  const switchLocale = useCallback(() => {
     const scrollPosition = window.scrollY;
-    
+
     const currentPath = pathname || "/";
     const segments = currentPath.split("/").filter(Boolean);
     const first = segments[0];
     let restSegments = first === "ru" || first === "en" ? segments.slice(1) : segments;
-    // Clean up any orphaned 'en' locale segment from previous buggy routes like /ru/en
     if (restSegments.length === 1 && restSegments[0] === "en") {
       restSegments = [];
     }
@@ -69,7 +60,6 @@ export function Header() {
     const toRuBase = rest === "/" ? "/ru" : `/ru${rest}`;
     const toEnBase = rest === "/" ? "/" : rest;
 
-    // Preserve search and hash
     const search = typeof window !== "undefined" ? window.location.search : "";
     const hash = typeof window !== "undefined" ? window.location.hash : "";
     const toRu = `${toRuBase}${search}${hash}`;
@@ -81,32 +71,31 @@ export function Header() {
       router.push(toRu);
     }
 
-    // Восстанавливаем позицию скролла после перехода
     setTimeout(() => {
       window.scrollTo(0, scrollPosition);
     }, 100);
   }, [pathname, router]);
 
-  // Мемоизируем обработчик открытия/закрытия меню
   const toggleMenu = useCallback(() => {
-    setOpen(prev => !prev);
+    setOpen((prev) => !prev);
   }, []);
 
-  // Мемоизируем обработчик закрытия меню
   const closeMenu = useCallback(() => {
     setOpen(false);
   }, []);
-  
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-md bg-black/40 border-b border-white/5" : "bg-black/20 backdrop-blur-sm"
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 transition-transform duration-300 ${
+        scrolled ? "bg-black/40 border-b border-white/5" : ""
       }`}
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 neon-border" />
-          <span className="font-semibold tracking-wide">{site.developerName}</span>
+          <span className="font-semibold tracking-wide">
+            {t("developerName", { defaultValue: site.developerName })}
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm text-secondary">
@@ -127,14 +116,12 @@ export function Header() {
             <span className="hidden sm:inline">
               <span className="font-semibold text-white">{t(`languages.${currentLang}`)}</span>
               <span className="text-secondary mx-2">/</span>
-              <span className="text-secondary hover:text-white transition-colors">{t(`languages.${currentLang === "ru" ? "en" : "ru"}`)}</span>
+              <span className="text-secondary hover:text-white transition-colors text-xs">
+                {t(`languages.${currentLang === "ru" ? "en" : "ru"}`)}
+              </span>
             </span>
           </button>
-          <button
-            className="md:hidden glass-card p-2"
-            aria-label="Open menu"
-            onClick={toggleMenu}
-          >
+          <button className="md:hidden glass-card p-2" aria-label="Open menu" onClick={toggleMenu}>
             <Menu />
           </button>
         </div>

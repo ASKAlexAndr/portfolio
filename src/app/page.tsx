@@ -6,7 +6,7 @@ import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <div className="pb-16">
+    <div className="page-container pb-16">
       <Hero />
       <About />
       <Skills />

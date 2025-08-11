@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import CVDownloadButton from "@/components/ui/CVDownloadButton";
 import { ArrowDown, Code, Smartphone } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import type { ReactNode } from "react";
 
 interface FloatingIcon {
-  icon: React.ReactNode;
+  icon: ReactNode;
   position: string;
   animation: {
     duration: number;
@@ -17,37 +17,33 @@ interface FloatingIcon {
   };
 }
 
+// Правило: статичные массивы, не зависящие от состояния/пропсов, держим вне компонента
+const floatingIcons: FloatingIcon[] = [
+  {
+    icon: <Code size={40} />,
+    position: "absolute top-1/4 left-1/4 text-blue-400/20",
+    animation: { duration: 3 },
+  },
+  {
+    icon: <Smartphone size={40} />,
+    position: "absolute top-1/3 right-1/4 text-cyan-400/20",
+    animation: { duration: 4, delay: 1 },
+  },
+];
+
+// Функции-обработчики без зависимостей держим вне компонента
+function scrollToAbout() {
+  document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function Hero() {
   const { t } = useTranslation();
   const pathname = usePathname();
-  
-  // Мемоизируем плавающие иконки
-  const floatingIcons = useMemo((): FloatingIcon[] => [
-    {
-      icon: <Code size={40} />,
-      position: "absolute top-1/4 left-1/4 text-blue-400/20",
-      animation: { duration: 3 }
-    },
-    {
-      icon: <Smartphone size={40} />,
-      position: "absolute top-1/3 right-1/4 text-cyan-400/20",
-      animation: { duration: 4, delay: 1 }
-    }
-  ], []);
-
-  // Мемоизируем обработчик скролла
-  const handleScrollToAbout = useCallback(() => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
 
   return (
     <section className="relative min-h-[90vh] h-screen flex items-center justify-center pt-24" id="hero" key={`hero-${pathname}`}>
-      {/* Улучшенный background с анимированными частицами */}
-      <div className="absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
-      </div>
+      {/* Убираем локальный фон полностью - используем только глобальный фон */}
 
-      {/* Плавающие иконки */}
       {floatingIcons.map((icon, index) => (
         <motion.div
           key={index}
@@ -67,10 +63,10 @@ export default function Hero() {
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight"
         >
           <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
-            {site.developerName}
+            {t("developerName", { defaultValue: site.developerName })}
           </span>
         </motion.h1>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,7 +75,7 @@ export default function Hero() {
         >
           {t("hero.subtitle")}
         </motion.p>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,8 +91,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 mt-4"
         >
-          <motion.a 
-            href="#work" 
+          <motion.a
+            href="#work"
             className="neon-button group relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -112,7 +108,6 @@ export default function Hero() {
           <CVDownloadButton />
         </motion.div>
 
-        {/* Анимированная стрелка вниз */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -123,7 +118,7 @@ export default function Hero() {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="text-secondary hover:text-white cursor-pointer"
-            onClick={handleScrollToAbout}
+            onClick={scrollToAbout}
           >
             <ArrowDown size={24} />
           </motion.div>
