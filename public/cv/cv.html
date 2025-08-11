@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alexandr Korotkov — CV</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --muted: #6b7280;
+      --text: #0f172a;
+      --accent: #4f46e5;
+      --radius: 12px;
+      --max-width: 800px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.5;
+      display:flex;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:2px solid var(--accent);
+      padding-bottom:12px;
+      margin-bottom:20px;
+    }
+
+    .head-left{display:flex;gap:16px;align-items:center}
+    .avatar{
+      width:72px;height:72px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#06b6d4);
+      display:grid;place-items:center;color:white;font-weight:700;font-size:20px
+    }
+    .meta h1{font-size:26px;margin:0}
+    .meta .role{color:var(--accent);font-weight:600}
+
+    .contact{font-size:14px;color:var(--muted);text-align:right}
+    .contact a{color:var(--muted);text-decoration:none;display:block;transition:color 0.2s ease}
+    .contact a:hover{color:var(--accent);text-decoration:underline}
+
+    section{margin-bottom:20px}
+    h2{font-size:16px;margin:0 0 8px 0;}
+    p.summary{margin:0 0 12px 0;color:#374151;font-size:14px}
+
+    .skills{display:flex;flex-wrap:wrap;gap:6px}
+    .skill{background:#f3f4f6;padding:4px 8px;border-radius:6px;font-size:12px}
+
+    .experience{display:flex;flex-direction:column;gap:12px}
+    .job{padding:10px 0;border-bottom:1px solid #e5e7eb}
+    .job:last-child{border-bottom:none}
+    .job .title{font-weight:600}
+    .job .title a{color:var(--accent);text-decoration:none;transition:color 0.2s ease}
+    .job .title a:hover{color:#3730a3;text-decoration:underline}
+    .job .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .job ul{margin:0;padding-left:18px;font-size:14px}
+
+    .achievements ul{margin:0;padding-left:18px;font-size:14px; color:#111}
+    .achievements li{margin-bottom:6px}
+
+    .muted{color:var(--muted);font-size:13px}
+
+    @media print{
+      body{padding:0}
+      a{text-decoration:none;color:inherit}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="document">
+    <header>
+      <div class="head-left">
+        <div class="avatar">AK</div>
+        <div class="meta">
+          <h1>Alexandr Korotkov</h1>
+          <div class="role">Senior React Native Engineer</div>
+          <div class="muted">5+ years</div>
+        </div>
+      </div>
+      <div class="contact">
+        <a href="mailto:ask.97.alexandr@gmail.com">ask.97.alexandr@gmail.com</a>
+        <a href="https://linkedin.com/in/alexandr-korotkov-rn" target="_blank">linkedin.com/in/alexandr-korotkov-rn</a>
+        <a href="https://github.com/ASKAlexAndr" target="_blank">github.com/ASKAlexAndr</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Professional summary</h2>
+      <p class="summary">Experienced Senior React Native Engineer with 6+ years of expertise in creating fluid,
+        performant mobile applications with rich animations and micro-interactions. Deep proficiency in
+        React Native, TypeScript, and Reanimated, with hands-on experience building complex
+        interactive tools and animation systems. Passionate about translating motion-rich designs into
+        production-grade interfaces that deliver exceptional user experiences.</p>
+    </section>
+
+    <section>
+      <h2>Core expertise</h2>
+      <div class="skills">
+        <span class="skill">React Native</span>
+        <span class="skill">TypeScript</span>
+        <span class="skill">Reanimated</span>
+        <span class="skill">Gesture Handler</span>
+        <span class="skill">Swift / Kotlin</span>
+        <span class="skill">CI / CD</span>
+        <span class="skill">Performance</span>
+        <span class="skill">Detox / Unit tests</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Professional experience</h2>
+      <div class="experience">
+        <article class="job">
+          <div class="title"><a href="https://kuper.ru" target="_blank">Kuper</a> — Senior React Native Developer</div>
+          <div class="meta">June 2023 — Present (2+ years)</div>
+          <ul>
+            <li>Led mobile development in advertising domain, overseeing architecture decisions, code quality standards, and technical roadmap planning.</li>
+            <li>Implemented complex interactive tools including banners with tear-off and scratch-off layers using Reanimated + Gesture Handler + SVG with precise touch synchronization.</li>
+            <li>Developed advertising SDK for React Native applications, focusing on smooth animations and user engagement.</li>
+            <li>Built performant animation systems that maintained 60fps across various device types.</li>
+            <li>Established testing culture by writing comprehensive Unit and Detox tests.</li>
+            <li>Configured CI/CD pipelines for automated testing and deployment.</li>
+            <li>Integrated a utility for auto-generating Zod TypeScript schemas from backend OpenAPI schemas, improving type safety and reducing manual code maintenance.</li>
+            <li>Collaborated closely with design teams to translate motion concepts into production-ready code.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <div class="title"><a href="https://2people.io" target="_blank">2people IT</a> — Software Engineer</div>
+          <div class="meta">December 2021 — May 2023 (1 year 6 months)</div>
+          <ul>
+            <li>Developed mobile and web applications using React and React Native.</li>
+            <li>Built custom native components and modules including media picker and image editor.</li>
+            <li>Focused on seamless user experiences with smooth transitions and interactions.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <div class="title"><a href="https://prominado.ru" target="_blank">Prominado</a> — React Native Developer</div>
+          <div class="meta">February 2020 — December 2021 (1 year 11 months)</div>
+          <ul>
+            <li>Developed applications from scratch, delivering fully functional products to clients.</li>
+            <li>Integrated payment systems, maps, push notifications, and other essential services, increasing app usability.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <div class="title"><a href="https://labmedia.su" target="_blank">Labmedia</a> — Web Software Developer</div>
+          <div class="meta">September 2018 — September 2019 (1 year 1 month)</div>
+          <ul>
+            <li>Developed multimedia educational applications on WebTutor platform.</li>
+            <li>Created multiplayer browser game using Vue and Python Tornado.</li>
+            <li>Built interactive educational experiences with focus on user engagement.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div><strong>Yaroslavl Demidov State University</strong></div>
+      <div class="muted">Bachelor's degree, Computational and Applied Mathematics (2015 — 2020)</div>
+    </section>
+
+    <section class="achievements">
+      <h2>Key Achievements</h2>
+      <ul>
+        <li><strong>Complex Animation Systems:</strong> Successfully implemented tear-off and scratch-off banner animations with precise touch synchronization, demonstrating expertise in creating engaging interactive experiences.</li>
+        <li><strong>SDK Development:</strong> Built advertising SDK for React Native applications, showcasing ability to create reusable, performant animation components.</li>
+        <li><strong>Performance Excellence:</strong> Consistently delivered smooth 60fps animations across various device types and screen sizes.</li>
+        <li><strong>Cross-Platform Expertise:</strong> Developed native modules in Swift and Kotlin, understanding native UI rendering pipelines.</li>
+        <li><strong>Team Leadership:</strong> Led mobile development initiatives and mentored junior developers.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <div class="muted">English — Professional working proficiency</div>
+      <div class="muted">Russian — Native</div>
+    </section>
+  </div>
+</body>
+</html>
