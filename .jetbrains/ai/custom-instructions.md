@@ -2,7 +2,7 @@
 
 Назначение: единая инструкция для JetBrains AI Assistant. Скопируйте содержимое в IDE: Settings/Preferences → Tools → AI Assistant → Custom instructions.
 
-Источник истины: правила проекта описаны в .cursor/rules.md. Этот файл — конденсированная версия, должен оставаться синхронизированным с .cursor/rules.md. При расхождениях приоритет у .cursor/rules.md.
+Источник истины: правила проекта описаны в docs/rules.md. Этот файл — конденсированная версия, должен оставаться синхронизированным с docs/rules.md. При расхождениях приоритет у docs/rules.md.
 
 ## Контекст проекта
 - TypeScript (strict).

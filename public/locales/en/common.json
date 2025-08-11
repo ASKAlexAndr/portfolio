@@ -9,7 +9,33 @@
   },
   "skills": { 
     "title": "Skills",
-    "subtitle": "Main technologies and tools I work with"
+    "subtitle": "Main technologies and tools I work with",
+    "explainer": "Badges indicate level, usage frequency, years of experience, production use, and custom highlights.",
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "occasionally": "Occasionally"
+    },
+    "rank": {
+      "expert": "Expert",
+      "advanced": "Advanced",
+      "intermediate": "Intermediate",
+      "basic": "Basic"
+    },
+    "yearsPlus_one": "{{count}} year+",
+    "yearsPlus_other": "{{count}} years+",
+    "production": {
+      "yes": "Production",
+      "no": "No production"
+    },
+    "legend": {
+      "title": "Legend",
+      "rank": "Rank",
+      "frequency": "Frequency",
+      "years": "Years",
+      "production": "Production",
+      "custom": "Custom badge"
+    }
   },
   "work": {
     "title": "Work",
@@ -52,12 +78,12 @@
     "title": "About",
     "subtitle": "Experienced developer focused on creating quality mobile applications",
     "desc": "Experienced developer with strong expertise in React Native, TypeScript, and mobile architecture. Skilled in working both independently and within large teams. Responsible for building mobile applications from scratch, publishing to app stores, providing ongoing support, and optimizing performance. Hands-on experience with native modules in Swift and Kotlin. Understand the importance of development processes: actively participated in code reviews, configured CI/CD pipelines, and worked with testing frameworks. Design thoughtful project architectures and write clean, stable, and scalable code.",
-    "exp": "6+ Years Experience",
+    "exp": "Experience",
     "expValue": "6+ years",
-    "location": "Moscow, Russia",
-    "locationValue": "Moscow",
-    "availability": "Open to opportunities",
-    "availabilityValue": "Open",
+    "location": "Location",
+    "locationValue": "Moscow, Russia",
+    "availability": "Status",
+    "availabilityValue": "Open to opportunities",
     "expertise": "Experience & Expertise",
     "mobileDev": "Mobile Development",
     "mobileDesc": "React Native, iOS, Android",

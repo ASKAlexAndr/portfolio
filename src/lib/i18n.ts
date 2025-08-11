@@ -32,6 +32,73 @@ if (!i18n.isInitialized) {
     defaultNS,
     interpolation: { escapeValue: false },
   });
+
+  // Программно добавляем недостающие переводы для раздела skills
+  i18n.addResourceBundle(
+    "en",
+    "common",
+    {
+      skills: {
+        title: "Skills",
+        subtitle: "Technologies I work with",
+        explainer: "Legend: level, usage frequency, years of experience, released apps, production usage, last used year",
+        frequency: {
+          daily: "Daily",
+          weekly: "Weekly",
+          occasionally: "Occasionally",
+        },
+        rank: {
+          expert: "Expert",
+          advanced: "Advanced",
+          intermediate: "Intermediate",
+          basic: "Basic",
+        },
+        yearsPlus: "{{count}}+ years",
+        releasesPlus: "{{count}}+ releases",
+        production: {
+          yes: "Production",
+          no: "Pet/Learning",
+        },
+        lastUsed: "Last used: {{year}}",
+        legend: "Legend: level, frequency, years, releases, production, last year",
+      },
+    },
+    true,
+    false
+  );
+
+  i18n.addResourceBundle(
+    "ru",
+    "common",
+    {
+      skills: {
+        title: "Навыки",
+        subtitle: "Технологии, с которыми работаю",
+        explainer: "Легенда: уровень, частота использования, опыт (годы), релизы, продакшн, последний год",
+        frequency: {
+          daily: "Ежедневно",
+          weekly: "Еженедельно",
+          occasionally: "Периодически",
+        },
+        rank: {
+          expert: "Эксперт",
+          advanced: "Продвинутый",
+          intermediate: "Средний",
+          basic: "Базовый",
+        },
+        yearsPlus: "{{count}}+ лет",
+        releasesPlus: "{{count}}+ релизов",
+        production: {
+          yes: "Продакшн",
+          no: "Пет/Обучение",
+        },
+        lastUsed: "Последний раз: {{year}}",
+        legend: "Легенда: уровень, частота, годы, релизы, продакшн, последний год",
+      },
+    },
+    true,
+    false
+  );
 }
 
 export function setLanguage(lang: "en" | "ru") {

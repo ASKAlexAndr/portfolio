@@ -4,16 +4,16 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Calendar, MapPin, Briefcase, Award, Code, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import type { ReactNode } from "react";
 
 interface HighlightItem {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   value: string;
 }
 
 interface ExpertiseItem {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   desc: string;
 }
@@ -21,23 +21,23 @@ interface ExpertiseItem {
 export default function About() {
   const { t } = useTranslation();
   const pathname = usePathname();
-  
-  // Мемоизируем highlights
-  const highlights = useMemo((): HighlightItem[] => [
+
+  // Зависит от t (языка) — не мемоизируем
+  const highlights: HighlightItem[] = [
     { icon: <Calendar size={20} />, label: t("about.exp"), value: t("about.expValue") },
     { icon: <MapPin size={20} />, label: t("about.location"), value: t("about.locationValue") },
     { icon: <Briefcase size={20} />, label: t("about.availability"), value: t("about.availabilityValue") },
-  ], [t]);
+  ];
 
-  // Мемоизируем expertise
-  const expertise = useMemo((): ExpertiseItem[] => [
+  // Зависит от t (языка) — не мемоизируем
+  const expertise: ExpertiseItem[] = [
     { icon: <Code size={20} />, title: t("about.mobileDev"), desc: t("about.mobileDesc") },
     { icon: <Award size={20} />, title: t("about.architecture"), desc: t("about.archDesc") },
     { icon: <Users size={20} />, title: t("about.teamwork"), desc: t("about.teamDesc") },
-  ], [t]);
+  ];
 
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 mt-16" key={pathname}>
+    <section id="about" className="mx-auto max-w-6xl px-4 mt-8" key={pathname}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,6 @@ export default function About() {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Левая колонка - фото и основные данные */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -64,8 +63,7 @@ export default function About() {
         >
           <div className="glass-card p-8 text-center">
             <div className="relative mb-6">
-              <div className="h-48 w-48 rounded-full mx-auto neon-border overflow-hidden" 
-                   style={{ background: "linear-gradient(135deg, #0af, #06f)" }}>
+              <div className="h-48 w-48 rounded-full mx-auto neon-border overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400">
                 <div className="h-full w-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
                   <span className="text-4xl font-bold text-white">AK</span>
                 </div>
@@ -78,7 +76,7 @@ export default function About() {
                 <div className="h-3 w-3 rounded-full bg-white"></div>
               </motion.div>
             </div>
-            
+
             <div className="space-y-4">
               {highlights.map((item, index) => (
                 <motion.div
@@ -102,7 +100,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Правая колонка - описание и экспертиза */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}

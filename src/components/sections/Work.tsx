@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { FaGithub } from "react-icons/fa6";
+import { Github } from "lucide-react";
 import { site } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -53,11 +53,7 @@ export default function Work() {
   const { t } = useTranslation();
   const pathname = usePathname();
 
-  // Мемоизируем данные в зависимости от выбранной вкладки
-  const currentData = useMemo(() => 
-    tab === "components" ? (reanimated as Card[]) : (projects as Card[]),
-    [tab]
-  );
+  const currentData: Card[] = tab === "components" ? reanimated : projects
 
   return (
     <section id="work" className="mx-auto max-w-6xl px-4 mt-16" key={pathname}>
@@ -69,21 +65,20 @@ export default function Work() {
             target="_blank"
             rel="noopener noreferrer"
             className="glass-card p-2 hover:bg-white/10 transition-colors"
-            title="View GitHub Profile"
+            title={t("work.viewGithub")}
+            aria-label={t("work.viewGithub")}
           >
-            <FaGithub size={20} />
+            <Github size={20} />
           </a>
-          <div className="glass-card p-1 rounded-lg inline-flex">
+          <div className="glass-card p-1 rounded-lg inline-flex gap-1">
             <button
-              className={`px-3 py-2 rounded-md ${
-                tab === "components" ? "bg-white/10" : ""
-              }`}
+              className={`px-3 py-2 transition-colors rounded-xl ${tab === "components" ? "bg-white/10" : "hover:bg-white/5"}`}
               onClick={() => setTab("components")}
             >
               {t("work.tabs.components")}
             </button>
             <button
-              className={`px-3 py-2 rounded-md ${tab === "projects" ? "bg-white/10" : ""}`}
+              className={`px-3 py-2 transition-colors rounded-xl ${tab === "projects" ? "bg-white/10" : "hover:bg-white/5"}`}
               onClick={() => setTab("projects")}
             >
               {t("work.tabs.projects")}

@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 
 interface ContactItem {
   icon: React.ReactNode;
@@ -16,43 +15,43 @@ interface ContactItem {
   color: string;
 }
 
+// Статичный список контактов вынесен за пределы компонента
+const contactItems: ContactItem[] = [
+  {
+    icon: <Mail size={24} />,
+    label: "Email",
+    value: site.email,
+    href: `mailto:${site.email}`,
+    color: "from-blue-500 to-cyan-400",
+  },
+  {
+    icon: <FaLinkedin size={24} />,
+    label: "LinkedIn",
+    value: site.linkedin,
+    href: `https://www.linkedin.com/in/${site.linkedin}`,
+    color: "from-blue-600 to-blue-800",
+  },
+  {
+    icon: <FaTelegram size={24} />,
+    label: "Telegram",
+    value: site.telegram,
+    href: `https://t.me/${site.telegram.replace(/^@/, "")}`,
+    color: "from-blue-400 to-blue-600",
+  },
+];
+
 export default function Contact() {
   const { t } = useTranslation();
   const pathname = usePathname();
-  
-  // Мемоизируем контакты, чтобы избежать пересоздания массива
-  const contactItems = useMemo((): ContactItem[] => [
-    {
-      icon: <Mail size={24} />,
-      label: "Email",
-      value: site.email,
-      href: `mailto:${site.email}`,
-      color: "from-blue-500 to-cyan-400"
-    },
-    {
-      icon: <FaLinkedin size={24} />,
-      label: "LinkedIn",
-      value: site.linkedin,
-      href: `https://www.linkedin.com/in/${site.linkedin}`,
-      color: "from-blue-600 to-blue-800"
-    },
-    {
-      icon: <FaTelegram size={24} />,
-      label: "Telegram",
-      value: site.telegram,
-      href: `https://t.me/${site.telegram.replace(/^@/, "")}`,
-      color: "from-blue-400 to-blue-600"
-    }
-  ], []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -62,9 +61,9 @@ export default function Contact() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut" as const
-      }
-    }
+        ease: "easeOut" as const,
+      },
+    },
   };
 
   return (
@@ -106,8 +105,8 @@ export default function Contact() {
                   {item.href ? (
                     <a
                       href={item.href}
-                      target={item.href.startsWith('http') ? "_blank" : undefined}
-                      rel={item.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
                     >
                       <div className={`p-3 rounded-lg bg-gradient-to-br ${item.color} shadow-lg`}>
