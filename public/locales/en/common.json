@@ -48,16 +48,19 @@
       },
       "recycled": {
         "title": "Infinite Carousel",
-        "desc": "Infinite recycled carousel for performance optimization"
+        "desc": "Infinite carousel with performance optimization"
       },
       "recycled-demo": {
-        "title": "Carousel Demo (100 banners)",
+        "title": "Performance Demo - 1000 Items",
         "desc": "Performance demonstration with large number of elements"
       },
       "tear": {
         "title": "Tear-off Banner",
         "desc": "Complex tear interaction using redash and custom gestures."
       }
+    },
+    "expandedExamples": {
+      "show": "Show additional examples"
     }
   },
   "contact": {
