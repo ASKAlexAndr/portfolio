@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Github, ChevronDown, ChevronUp } from "lucide-react";
@@ -33,38 +33,37 @@ const reanimated: ReanimatedComponent[] = [
     i18n: { title: "work.components.scratch.title", desc: "work.components.scratch.desc" },
     tech: ["Reanimated", "Gesture Handler", "SVG"],
     link: "#",
-    video: "/work/scratch-off.mp4?v=2",
+    video: "/work/scratch-off.mp4?v=3",
   },
   {
     i18n: { title: "work.components.tear.title", desc: "work.components.tear.desc" },
     tech: ["Reanimated", "Redash", "Gesture Handler"],
     link: "#",
-    video: "/work/tear-off.mp4?v=2",
+    video: "/work/tear-off.mp4?v=3",
   },
   {
     i18n: { title: "work.components.recycled.title", desc: "work.components.recycled.desc" },
     tech: ["Reanimated", "Gesture Handler", "Performance"],
     link: "#",
-    video: "/work/carousel-normal.mp4?v=2",
+    video: "/work/carousel-normal.mp4?v=3",
     expandedExamples: [
       {
         i18n: { title: "work.components.recycled-demo.title", desc: "work.components.recycled-demo.desc" },
         tech: ["Reanimated", "Gesture Handler", "Performance", "Optimization"],
         link: "#",
-        video: "/work/carousel-100-banners.mp4?v=2",
+        video: "/work/carousel-100-banners.mp4?v=3",
       }
     ]
   },
 ];
 
-const projects: Project[] = [
-  { title: "[PROJECT_1_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
-  { title: "[PROJECT_2_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
-  { title: "[PROJECT_3_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
-];
+// const projects: Project[] = [
+//   { title: "[PROJECT_1_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
+//   { title: "[PROJECT_2_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
+//   { title: "[PROJECT_3_NAME]", description: "[BRIEF_DESCRIPTION]", tech: ["RN", "TS"] },
+// ];
 
 export default function Work() {
-  const [tab, setTab] = useState<"projects" | "components">("projects");
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const { t } = useTranslation();
   const pathname = usePathname();
@@ -79,7 +78,7 @@ export default function Work() {
     setExpandedCards(newExpanded);
   };
 
-  const currentData: Card[] = tab === "projects" ? projects : reanimated;
+  const currentData: Card[] = reanimated;
 
   const renderExpandedExamples = (examples: ReanimatedComponent[], parentTitle: string) => (
     <motion.div
@@ -93,8 +92,8 @@ export default function Work() {
         {examples.map((example, i) => (
           <motion.div
             key={example.i18n.title}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             className="glass-card p-3 border border-white/5"
           >
@@ -127,76 +126,91 @@ export default function Work() {
     </motion.div>
   );
 
-  const renderCard = (card: Card, i: number) => {
+    const renderCard = (card: Card, i: number) => {
     const cardTitle = "i18n" in card ? card.i18n.title : card.title;
     const hasExpandedExamples = "expandedExamples" in card && card.expandedExamples && card.expandedExamples.length > 0;
     const isExpanded = expandedCards.has(cardTitle);
 
     return (
-      <motion.div
-        key={cardTitle}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ delay: i * 0.05 }}
-        className="glass-card p-4 hover:-translate-y-0.5"
-      >
-        {card.video ? (
-          <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10 bg-black/20">
-            <video
-              src={card.video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              className="w-full h-full object-cover"
-              aria-label={("i18n" in card ? t(card.i18n.title) : card.title)}
-            />
-          </div>
-        ) : card.image ? (
-          <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10">
-            <Image
-              src={card.image}
-              alt={("i18n" in card ? t(card.i18n.title) : card.title)}
-              width={400}
-              height={225}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : (
-          <div className="aspect-video mb-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-400/10 border border-white/10" />
-        )}
-        
-        <h3 className="font-medium mb-1">{"i18n" in card ? t(card.i18n.title) : card.title}</h3>
-        <p className="text-sm text-secondary">{"i18n" in card ? t(card.i18n.desc) : card.description}</p>
-        
-        <div className="flex flex-wrap gap-2 mt-3">
-          {card.tech?.map((tech: string) => (
-            <span key={tech} className="skill-badge">
-              {tech}
-            </span>
-          ))}
-        </div>
+      <div key={cardTitle}>
 
-        {hasExpandedExamples && (
-          <div className="mt-4 pt-3 border-t border-white/10">
-            <button
-              onClick={() => toggleCardExpansion(cardTitle)}
-              className="flex items-center gap-2 text-sm text-secondary hover:text-white/80 transition-colors"
-            >
-              {isExpanded ? (
-                <ChevronUp size={16} />
-              ) : (
-                <ChevronDown size={16} />
-              )}
-                             {t("work.expandedExamples.show")} ({card.expandedExamples!.length})
-            </button>
-            
-            {isExpanded && renderExpandedExamples(card.expandedExamples!, cardTitle)}
+        
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: i * 0.05 }}
+          className="glass-card p-4 hover:-translate-y-0.5"
+        >
+          {card.video ? (
+            <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10 bg-black/20">
+              <video
+                src={card.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+                aria-label={("i18n" in card ? t(card.i18n.title) : card.title)}
+              />
+            </div>
+          ) : card.image ? (
+            <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10">
+              <Image
+                src={card.image}
+                alt={("i18n" in card ? t(card.i18n.title) : card.title)}
+                width={400}
+                height={225}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <div className="aspect-video mb-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-400/10 border border-white/10" />
+          )}
+          
+          <h3 className="font-medium mb-1">{"i18n" in card ? t(card.i18n.title) : card.title}</h3>
+          <p className="text-sm text-secondary">{"i18n" in card ? t(card.i18n.desc) : card.description}</p>
+          
+          <div className="flex flex-wrap gap-2 mt-3">
+            {card.tech?.map((tech: string) => (
+              <span key={tech} className="skill-badge">
+                {tech}
+              </span>
+            ))}
           </div>
-        )}
-      </motion.div>
+
+          {hasExpandedExamples && (
+            <div className="mt-4 pt-3 border-t border-white/10">
+              <button
+                onClick={() => toggleCardExpansion(cardTitle)}
+                className="flex items-center gap-2 text-sm text-secondary hover:text-white/80 transition-colors"
+              >
+                {isExpanded ? (
+                  <ChevronUp size={16} />
+                ) : (
+                  <ChevronDown size={16} />
+                )}
+                {t("work.expandedExamples.show")} ({card.expandedExamples!.length})
+              </button>
+            </div>
+          )}
+        </motion.div>
+        
+        <AnimatePresence>
+          {hasExpandedExamples && isExpanded && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4"
+            >
+              {renderExpandedExamples(card.expandedExamples!, cardTitle)}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     );
   };
 
@@ -217,14 +231,7 @@ export default function Work() {
           </a>
           <div className="glass-card p-1 rounded-lg inline-flex gap-1">
             <button
-              className={`px-3 py-2 transition-colors rounded-xl ${tab === "projects" ? "bg-white/10" : "hover:bg-white/5"}`}
-              onClick={() => setTab("projects")}
-            >
-              {t("work.tabs.projects")}
-            </button>
-            <button
-              className={`px-3 py-2 transition-colors rounded-xl ${tab === "components" ? "bg-white/10" : "hover:bg-white/5"}`}
-              onClick={() => setTab("components")}
+              className="px-3 py-2 transition-colors rounded-xl bg-white/10"
             >
               {t("work.tabs.components")}
             </button>
