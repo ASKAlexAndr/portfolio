@@ -6,11 +6,14 @@ import { useTranslation } from "react-i18next";
 import { Github } from "lucide-react";
 import { site } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface ReanimatedComponent {
   i18n: { title: string; desc: string };
   tech: string[];
   link: string;
+  image?: string;
+  video?: string;
 }
 
 interface Project {
@@ -19,7 +22,7 @@ interface Project {
   tech: string[];
 }
 
-type CardBase = { tech: string[]; link?: string };
+type CardBase = { tech: string[]; link?: string; image?: string; video?: string };
 type I18nCard = CardBase & { i18n: { title: string; desc: string } };
 type PlainCard = CardBase & { title: string; description: string };
 type Card = I18nCard | PlainCard;
@@ -29,16 +32,25 @@ const reanimated: ReanimatedComponent[] = [
     i18n: { title: "work.components.scratch.title", desc: "work.components.scratch.desc" },
     tech: ["Reanimated", "Gesture Handler", "SVG"],
     link: "#",
-  },
-  {
-    i18n: { title: "work.components.recycled.title", desc: "work.components.recycled.desc" },
-    tech: ["Reanimated", "Gesture Handler", "Performance"],
-    link: "#",
+    video: "/work/scratch-off.mp4?v=2",
   },
   {
     i18n: { title: "work.components.tear.title", desc: "work.components.tear.desc" },
     tech: ["Reanimated", "Redash", "Gesture Handler"],
     link: "#",
+    video: "/work/tear-off.mp4?v=2",
+  },
+  {
+    i18n: { title: "work.components.recycled.title", desc: "work.components.recycled.desc" },
+    tech: ["Reanimated", "Gesture Handler", "Performance"],
+    link: "#",
+    video: "/work/carousel-normal.mp4?v=2",
+  },
+  {
+    i18n: { title: "work.components.recycled-demo.title", desc: "work.components.recycled-demo.desc" },
+    tech: ["Reanimated", "Gesture Handler", "Performance", "Optimization"],
+    link: "#",
+    video: "/work/carousel-100-banners.mp4?v=2",
   },
 ];
 
@@ -49,11 +61,11 @@ const projects: Project[] = [
 ];
 
 export default function Work() {
-  const [tab, setTab] = useState<"components" | "projects">("components");
+  const [tab, setTab] = useState<"projects" | "components">("projects");
   const { t } = useTranslation();
   const pathname = usePathname();
 
-  const currentData: Card[] = tab === "components" ? reanimated : projects
+  const currentData: Card[] = tab === "projects" ? projects : reanimated
 
   return (
     <section id="work" className="mx-auto max-w-6xl px-4 mt-16" key={pathname}>
@@ -72,16 +84,16 @@ export default function Work() {
           </a>
           <div className="glass-card p-1 rounded-lg inline-flex gap-1">
             <button
-              className={`px-3 py-2 transition-colors rounded-xl ${tab === "components" ? "bg-white/10" : "hover:bg-white/5"}`}
-              onClick={() => setTab("components")}
-            >
-              {t("work.tabs.components")}
-            </button>
-            <button
               className={`px-3 py-2 transition-colors rounded-xl ${tab === "projects" ? "bg-white/10" : "hover:bg-white/5"}`}
               onClick={() => setTab("projects")}
             >
               {t("work.tabs.projects")}
+            </button>
+            <button
+              className={`px-3 py-2 transition-colors rounded-xl ${tab === "components" ? "bg-white/10" : "hover:bg-white/5"}`}
+              onClick={() => setTab("components")}
+            >
+              {t("work.tabs.components")}
             </button>
           </div>
         </div>
@@ -100,7 +112,32 @@ export default function Work() {
             transition={{ delay: i * 0.05 }}
             className="glass-card p-4 block hover:-translate-y-0.5"
           >
-            <div className="aspect-video mb-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-400/10 border border-white/10" />
+            {card.video ? (
+              <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10 bg-black/20">
+                <video
+                  src={card.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                  aria-label={("i18n" in card ? t(card.i18n.title) : card.title)}
+                />
+              </div>
+            ) : card.image ? (
+              <div className="aspect-video mb-3 rounded-lg overflow-hidden border border-white/10">
+                <Image
+                  src={card.image}
+                  alt={("i18n" in card ? t(card.i18n.title) : card.title)}
+                  width={400}
+                  height={225}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="aspect-video mb-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-400/10 border border-white/10" />
+            )}
             <h3 className="font-medium mb-1">{"i18n" in card ? t(card.i18n.title) : card.title}</h3>
             <p className="text-sm text-secondary">{"i18n" in card ? t(card.i18n.desc) : card.description}</p>
             <div className="flex flex-wrap gap-2 mt-3">

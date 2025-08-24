@@ -50,6 +50,10 @@
         "title": "Infinite Carousel",
         "desc": "Infinite recycled carousel for performance optimization"
       },
+      "recycled-demo": {
+        "title": "Carousel Demo (100 banners)",
+        "desc": "Performance demonstration with large number of elements"
+      },
       "tear": {
         "title": "Tear-off Banner",
         "desc": "Complex tear interaction using redash and custom gestures."

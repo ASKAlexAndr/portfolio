@@ -92,7 +92,13 @@ export function Header() {
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 neon-border" />
+          <div className="h-8 w-8 rounded-lg overflow-hidden neon-border">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="h-full w-full object-cover"
+            />
+          </div>
           <span className="font-semibold tracking-wide">
             {t("developerName", { defaultValue: site.developerName })}
           </span>
