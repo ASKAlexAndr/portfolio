@@ -33,6 +33,8 @@ export function Header() {
   );
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -48,7 +50,7 @@ export function Header() {
   }, [i18n]);
 
   const switchLocale = useCallback(() => {
-    const scrollPosition = window.scrollY;
+    const scrollPosition = typeof window !== "undefined" ? window.scrollY : 0;
 
     const currentPath = pathname || "/";
     const segments = currentPath.split("/").filter(Boolean);
@@ -72,9 +74,11 @@ export function Header() {
       router.push(toRu);
     }
 
-    setTimeout(() => {
-      window.scrollTo(0, scrollPosition);
-    }, 100);
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
+        window.scrollTo(0, scrollPosition);
+      }, 100);
+    }
   }, [pathname, router]);
 
   const toggleMenu = useCallback(() => {

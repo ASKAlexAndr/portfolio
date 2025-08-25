@@ -4,14 +4,20 @@ import Link from "next/link";
 import { site } from "@/lib/utils";
 import { FaGithub, FaLinkedinIn, FaSquareGithub, FaTelegram } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
   const { t } = useTranslation();
+  const [currentYear, setCurrentYear] = useState<string>("");
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString());
+  }, []);
   return (
     <footer className="mt-20 border-t border-white/10">
       <div className="mx-auto max-w-6xl px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-secondary">
-          © {new Date().getFullYear()} {site.developerName}. {t("footer.rights")}
+          © {currentYear} {t("developerName", { defaultValue: site.developerName })}. {t("footer.rights")}
         </p>
         <p className="text-sm text-secondary flex items-center gap-1">
           {t("footer.made")}
