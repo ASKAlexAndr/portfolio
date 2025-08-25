@@ -1,5 +1,5 @@
 {
-  "nav": {"about": "Обо мне", "skills": "Навыки", "work": "Проекты", "contact": "Контакты"},
+  "nav": {"about": "Обо мне", "skills": "Навыки", "work": "Работа", "contact": "Контакты"},
   "languages": {"ru": "RU", "en": "EN"},
   "developerName": "Александр Коротков",
   "hero": {
