@@ -4,8 +4,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Languages, Menu } from "lucide-react";
-import { site } from "@/lib/utils";
+import { site, getAssetPath } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 interface NavItem {
   href: string;
@@ -93,9 +94,11 @@ export function Header() {
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <Link href="#" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg overflow-hidden neon-border">
-            <img 
-              src="/logo.png" 
+            <Image 
+              src={getAssetPath("/logo.png")} 
               alt="Logo" 
+              width={32}
+              height={32}
               className="h-full w-full object-cover"
             />
           </div>

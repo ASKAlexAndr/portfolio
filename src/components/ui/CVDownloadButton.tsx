@@ -3,6 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { useCallback, useMemo } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 interface CVDownloadButtonProps {
   className?: string;
@@ -17,7 +18,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     const fileName = currentLanguage === "ru" ? "cv-ru.pdf" : "cv-en.pdf";
     return {
       cvFileName: fileName,
-      cvUrl: `/cv/${fileName}`
+      cvUrl: getAssetPath(`/cv/${fileName}`)
     };
   }, [i18n.language]);
   

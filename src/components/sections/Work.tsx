@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Github, ChevronDown, ChevronUp } from "lucide-react";
-import { site } from "@/lib/utils";
+import { site, getAssetPath } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -33,25 +33,25 @@ const reanimated: ReanimatedComponent[] = [
     i18n: { title: "work.components.scratch.title", desc: "work.components.scratch.desc" },
     tech: ["Reanimated", "Gesture Handler", "SVG"],
     link: "#",
-    video: "/work/scratch-off.mp4?v=3",
+    video: getAssetPath("/work/scratch-off.mp4?v=3"),
   },
   {
     i18n: { title: "work.components.tear.title", desc: "work.components.tear.desc" },
     tech: ["Reanimated", "Redash", "Gesture Handler"],
     link: "#",
-    video: "/work/tear-off.mp4?v=3",
+    video: getAssetPath("/work/tear-off.mp4?v=3"),
   },
   {
     i18n: { title: "work.components.recycled.title", desc: "work.components.recycled.desc" },
     tech: ["Reanimated", "Gesture Handler", "Performance"],
     link: "#",
-    video: "/work/carousel-normal.mp4?v=3",
+    video: getAssetPath("/work/carousel-normal.mp4?v=3"),
     expandedExamples: [
       {
         i18n: { title: "work.components.recycled-demo.title", desc: "work.components.recycled-demo.desc" },
         tech: ["Reanimated", "Gesture Handler", "Performance", "Optimization"],
         link: "#",
-        video: "/work/carousel-100-banners.mp4?v=3",
+        video: getAssetPath("/work/carousel-100-banners.mp4?v=3"),
       }
     ]
   },
