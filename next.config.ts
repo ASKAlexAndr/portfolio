@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     unoptimized: true,
   },
+  basePath: process.env.NODE_ENV === 'production' ? '/portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio/' : '',
 };
 
 export default nextConfig;
