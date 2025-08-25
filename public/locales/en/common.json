@@ -40,6 +40,7 @@
   },
   "work": {
     "title": "Work",
+    "viewGithub": "View on GitHub",
     "tabs": { "components": "Components", "projects": "Projects" },
     "components": {
       "scratch": {
@@ -60,6 +61,7 @@
       }
     },
     "expandedExamples": {
+      "title": "Additional Examples",
       "show": "Show additional examples"
     }
   },
@@ -81,7 +83,15 @@
     "bestTime": "Best Time to Contact",
     "workHours": "Weekdays 9AM-6PM"
   },
-  "footer": { "made": "Made with AI" },
+  "footer": { 
+    "made": "Made with AI",
+    "rights": "All rights reserved"
+  },
+  "social": {
+    "telegram": "Telegram",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
   "about": {
     "title": "About",
     "subtitle": "Experienced developer focused on creating quality mobile applications",

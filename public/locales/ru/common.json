@@ -42,6 +42,7 @@
   },
   "work": {
     "title": "Проекты",
+    "viewGithub": "Посмотреть на GitHub",
     "tabs": { "components": "Компоненты", "projects": "Проекты" },
     "components": {
       "scratch": {
@@ -72,7 +73,7 @@
     "email": "Email",
     "message": "Сообщение",
     "send": "Отправить",
-    "subtitle": "Готов к новым проектам и интересным предложениям. Давайте обсудим ваши идеи!",
+    "subtitle": "Готов к новым проектам и интересным предложениям.\nДавайте обсудим ваши идеи!",
     "contactMe": "Связаться со мной",
     "aboutWork": "О работе",
     "availability": "Открыт к предложениям",
@@ -84,7 +85,15 @@
     "bestTime": "Лучшее время для связи",
     "workHours": "Будни 9:00-18:00"
   },
-  "footer": { "made": "Сделано с AI" },
+  "footer": { 
+    "made": "Made with AI",
+    "rights": "All rights reserved"
+  },
+  "social": {
+    "telegram": "Telegram",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
   "about": {
     "title": "Обо мне",
     "subtitle": "Опытный разработчик с фокусом на создание качественных мобильных приложений",

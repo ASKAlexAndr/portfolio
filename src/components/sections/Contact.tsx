@@ -78,7 +78,7 @@ export default function Contact() {
         <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
           {t("contact.title")}
         </h2>
-        <p className="text-secondary text-lg max-w-2xl mx-auto">
+        <p className="text-secondary text-lg max-w-2xl mx-auto whitespace-pre-line">
           {t("contact.subtitle")}
         </p>
       </motion.div>
