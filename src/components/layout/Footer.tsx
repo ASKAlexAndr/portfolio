@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className="mt-20 border-t border-white/10">
       <div className="mx-auto max-w-6xl px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-secondary">
-          © {currentYear} {t("developerName", { defaultValue: site.developerName })}. {t("footer.rights")}
+          © {currentYear || "2024"} {t("developerName", { defaultValue: site.developerName })}. {t("footer.rights")}
         </p>
         <p className="text-sm text-secondary flex items-center gap-1">
           {t("footer.made")}

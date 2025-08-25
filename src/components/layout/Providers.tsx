@@ -13,10 +13,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     const maybeLocale = segments[0];
     const newLang = maybeLocale === "ru" ? "ru" : "en";
     
-    // Принудительно устанавливаем язык с небольшой задержкой
-    setTimeout(() => {
-      setLanguage(newLang);
-    }, 0);
+    setLanguage(newLang);
   }, [pathname]);
 
   return <>{children}</>;
