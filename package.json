@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-pdf": "node scripts/generate-pdf.js"
+    "generate-pdf": "node scripts/generate-pdf.js",
+    "export": "next build",
+    "deploy": "npm run export",
+    "deploy:quick": "./scripts/deploy.sh"
   },
   "dependencies": {
     "clsx": "^2.1.1",
