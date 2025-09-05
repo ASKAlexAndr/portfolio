@@ -9,7 +9,7 @@
     "lint": "next lint",
     "generate-pdf": "node scripts/generate-pdf.js",
     "export": "next build",
-    "deploy": "npm run export",
+    "deploy": "yarn export",
     "deploy:quick": "./scripts/deploy.sh"
   },
   "dependencies": {

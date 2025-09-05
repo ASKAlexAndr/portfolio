@@ -2,6 +2,7 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
 import enCommon from "@/../public/locales/en/common.json";
 import ruCommon from "@/../public/locales/ru/common.json";
 
@@ -12,7 +13,7 @@ export const resources = {
   ru: { common: ruCommon },
 } as const;
 
-// Определяем язык из URL
+// Determine language from URL
 const getInitialLanguage = () => {
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
@@ -33,7 +34,7 @@ if (!i18n.isInitialized) {
     interpolation: { escapeValue: false },
   });
 
-  // Программно добавляем недостающие переводы для раздела skills
+  // Programmatically add missing translations for skills section
   i18n.addResourceBundle(
     "en",
     "common",
@@ -104,17 +105,15 @@ if (!i18n.isInitialized) {
 export function setLanguage(lang: "en" | "ru") {
   if (i18n.language !== lang) {
     void i18n.changeLanguage(lang);
-    // Принудительно обновляем язык
+    // Force language update
     i18n.language = lang;
   }
 }
 
-// Функция для обновления языка при смене URL
+// Function to update language when URL changes
 export function updateLanguageFromPath(pathname: string) {
   const newLang = pathname.startsWith("/ru") ? "ru" : "en";
   if (i18n.language !== newLang) {
     void i18n.changeLanguage(newLang);
   }
 }
-
-

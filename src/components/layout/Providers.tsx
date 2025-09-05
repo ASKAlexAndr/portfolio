@@ -2,8 +2,9 @@
 
 import { useEffect } from "react";
 import type { ReactNode } from "react";
-import { setLanguage } from "@/lib/i18n";
 import { usePathname } from "next/navigation";
+
+import { setLanguage } from "@/lib/i18n";
 
 export default function Providers({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -18,5 +19,3 @@ export default function Providers({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
-
-

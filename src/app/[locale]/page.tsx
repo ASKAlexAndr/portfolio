@@ -6,5 +6,3 @@ export function generateStaticParams() {
     { locale: 'ru' }
   ];
 }
-
-

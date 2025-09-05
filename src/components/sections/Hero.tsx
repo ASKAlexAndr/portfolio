@@ -1,12 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { site } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
-import CVDownloadButton from "@/components/ui/CVDownloadButton";
-import { ArrowDown, Code, Smartphone } from "lucide-react";
-import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { ArrowDown, Code, Smartphone } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { site } from "@/lib/utils";
+import CVDownloadButton from "@/components/ui/CVDownloadButton";
 
 interface FloatingIcon {
   icon: ReactNode;
@@ -17,7 +18,6 @@ interface FloatingIcon {
   };
 }
 
-// Правило: статичные массивы, не зависящие от состояния/пропсов, держим вне компонента
 const floatingIcons: FloatingIcon[] = [
   {
     icon: <Code size={40} />,
@@ -31,7 +31,6 @@ const floatingIcons: FloatingIcon[] = [
   },
 ];
 
-// Функции-обработчики без зависимостей держим вне компонента
 function scrollToAbout() {
   document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
 }
@@ -42,7 +41,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[90vh] h-screen flex items-center justify-center pt-24" id="hero" key={`hero-${pathname}`}>
-      {/* Убираем локальный фон полностью - используем только глобальный фон */}
 
       {floatingIcons.map((icon, index) => (
         <motion.div
@@ -127,5 +125,3 @@ export default function Hero() {
     </section>
   );
 }
-
-

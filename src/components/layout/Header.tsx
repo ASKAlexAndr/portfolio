@@ -1,15 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useCallback, useMemo } from "react";
-import { Languages, Menu } from "lucide-react";
-import { site, getAssetPath } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import { Languages, Menu } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { site, getAssetPath } from "@/lib/utils";
 
 interface NavItem {
-  href: string;
+  href:  string;
   key: string;
 }
 
@@ -161,5 +162,3 @@ export function Header() {
 }
 
 export default Header;
-
-

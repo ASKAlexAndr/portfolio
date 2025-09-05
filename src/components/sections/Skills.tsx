@@ -1,9 +1,9 @@
 "use client";
 
+import type { TFunction } from "i18next";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
-import type { TFunction } from "i18next";
 
 type Frequency = "daily" | "weekly" | "occasionally";
 type Rank = "Expert" | "Advanced" | "Intermediate" | "Basic";

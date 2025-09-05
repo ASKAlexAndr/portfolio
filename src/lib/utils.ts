@@ -14,11 +14,9 @@ export const site = {
 };
 
 export function getAssetPath(path: string): string {
-  // В продакшене добавляем префикс /portfolio для GitHub Pages
+  // Add /portfolio prefix in production for GitHub Pages
   if (process.env.NODE_ENV === 'production') {
     return `/portfolio${path}`;
   }
   return path;
 }
-
-

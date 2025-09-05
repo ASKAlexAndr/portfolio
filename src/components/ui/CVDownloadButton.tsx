@@ -1,8 +1,9 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
 import { useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+
 import { getAssetPath } from "@/lib/utils";
 
 interface CVDownloadButtonProps {
@@ -12,7 +13,6 @@ interface CVDownloadButtonProps {
 export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   const { t, i18n } = useTranslation();
   
-  // Мемоизируем вычисления для CV файла
   const { cvFileName, cvUrl } = useMemo(() => {
     const currentLanguage = i18n.language;
     const fileName = currentLanguage === "ru" ? "cv-ru.pdf" : "cv-en.pdf";
@@ -22,7 +22,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     };
   }, [i18n.language]);
   
-  // Мемоизируем обработчик события
   const handleDownload = useCallback(() => {
     const link = document.createElement("a");
     link.href = cvUrl;

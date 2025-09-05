@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { site } from "@/lib/utils";
-import { FaGithub, FaLinkedinIn, FaSquareGithub, FaTelegram } from "react-icons/fa6";
-import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { FaGithub, FaLinkedinIn, FaTelegram } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
+
+import { site } from "@/lib/utils";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -52,5 +53,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-

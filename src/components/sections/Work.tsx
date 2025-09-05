@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { Github, ChevronDown, ChevronUp } from "lucide-react";
-import { site, getAssetPath } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, ChevronDown, ChevronUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { site, getAssetPath } from "@/lib/utils";
 
 interface ReanimatedComponent {
   i18n: { title: string; desc: string };
@@ -245,5 +246,3 @@ export default function Work() {
     </section>
   );
 }
-
-

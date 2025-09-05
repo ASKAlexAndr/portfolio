@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
-import { Calendar, MapPin, Briefcase, Award, Code, Users } from "lucide-react";
-import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { Calendar, MapPin, Briefcase, Award, Code, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface HighlightItem {
   icon: ReactNode;
@@ -22,14 +22,12 @@ export default function About() {
   const { t } = useTranslation();
   const pathname = usePathname();
 
-  // Зависит от t (языка) — не мемоизируем
   const highlights: HighlightItem[] = [
     { icon: <Calendar size={20} />, label: t("about.exp"), value: t("about.expValue") },
     { icon: <MapPin size={20} />, label: t("about.location"), value: t("about.locationValue") },
     { icon: <Briefcase size={20} />, label: t("about.availability"), value: t("about.availabilityValue") },
   ];
 
-  // Зависит от t (языка) — не мемоизируем
   const expertise: ExpertiseItem[] = [
     { icon: <Code size={20} />, title: t("about.mobileDev"), desc: t("about.mobileDesc") },
     { icon: <Award size={20} />, title: t("about.architecture"), desc: t("about.archDesc") },
@@ -139,5 +137,3 @@ export default function About() {
     </section>
   );
 }
-
-

@@ -1,11 +1,12 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { FaLinkedin, FaTelegram } from "react-icons/fa6";
-import { motion } from "framer-motion";
-import { site } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+
+import { site } from "@/lib/utils";
 
 interface ContactItem {
   icon: React.ReactNode;
@@ -15,7 +16,6 @@ interface ContactItem {
   color: string;
 }
 
-// Статичный список контактов вынесен за пределы компонента
 const contactItems: ContactItem[] = [
   {
     icon: <Mail size={24} />,
@@ -90,7 +90,6 @@ export default function Contact() {
         viewport={{ once: true }}
         className="flex justify-center"
       >
-        {/* Основные контакты */}
         <motion.div variants={itemVariants} className="w-full max-w-md">
           <div className="glass-card p-8">
             <h3 className="text-xl font-semibold mb-6 text-center">{t("contact.contactMe")}</h3>
@@ -139,5 +138,3 @@ export default function Contact() {
     </section>
   );
 }
-
-
