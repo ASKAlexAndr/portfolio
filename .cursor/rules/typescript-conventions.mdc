@@ -1,0 +1,103 @@
+---
+description: TypeScript conventions and best practices
+globs: ["src/**/*.{ts,tsx}", "app/**/*.{ts,tsx}"]
+alwaysApply: false
+---
+
+# TypeScript Conventions
+
+## Strict Typing
+- Always define interfaces for props and data
+- Avoid 'any', use 'unknown' with type guards
+- Use generic types for reusable components
+
+## Interface Examples
+
+### Basic interfaces:
+```tsx
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface ComponentProps {
+  user: User;
+  onUpdate: (user: User) => void;
+}
+```
+
+### Generic components:
+```tsx
+interface ListProps<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+}
+
+function List<T>({ items, renderItem }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Type guards:
+```tsx
+function isUser(data: unknown): data is User {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'id' in data &&
+    'name' in data &&
+    'email' in data
+  );
+}
+
+const handleData = (data: unknown) => {
+  if (isUser(data)) {
+    // data is User
+    console.log(data.name);
+  }
+};
+```
+
+## Avoid any
+```tsx
+// Bad
+function processData(data: any) {
+  return data.someProperty;
+}
+
+// Good
+function processData(data: unknown) {
+  if (typeof data === 'object' && data !== null && 'someProperty' in data) {
+    return (data as { someProperty: unknown }).someProperty;
+  }
+  return null;
+}
+```
+
+## API and Error Handling
+- Handle errors explicitly in API calls
+- Avoid swallowing exceptions
+- DO NOT log sensitive data
+
+```tsx
+async function fetchUser(id: string): Promise<User | null> {
+  try {
+    const response = await fetch(`/api/users/${id}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data as User;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
+  }
+}
+```

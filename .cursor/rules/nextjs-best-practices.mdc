@@ -1,0 +1,84 @@
+---
+description: Next.js best practices and conventions
+globs: ["app/**/*.{tsx,ts}", "src/app/**/*.{tsx,ts}"]
+alwaysApply: false
+---
+
+# Next.js Best Practices
+
+## Components and Images
+- Prefer next/image over native <img> for optimized images
+- Prefer Server Components for data fetching
+
+## Cache Management
+- Control cache via fetch options (cache, next.revalidate)
+- Examples:
+  ```tsx
+  // No caching
+  await fetch(url, { cache: 'no-store' })
+  
+  // With revalidation every 3600 seconds
+  await fetch(url, { next: { revalidate: 3600 } })
+  ```
+
+## Application Structure
+- Use App Router structure
+- Place components in appropriate directories
+- Use Server Components by default, Client Components only when needed
+
+## Usage Examples
+
+### Server Component with data:
+```tsx
+// app/posts/page.tsx
+async function PostsPage() {
+  const posts = await fetch('https://api.example.com/posts', {
+    next: { revalidate: 3600 }
+  }).then(res => res.json());
+  
+  return (
+    <div>
+      {posts.map(post => (
+        <article key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+        </article>
+      ))}
+    </div>
+  );
+}
+```
+
+### Client Component when interactivity is needed:
+```tsx
+'use client';
+
+import { useState } from 'react';
+
+export function InteractiveButton() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+### Optimized images:
+```tsx
+import Image from 'next/image';
+
+export function HeroImage() {
+  return (
+    <Image
+      src="/hero.jpg"
+      alt="Hero image"
+      width={800}
+      height={600}
+      priority
+    />
+  );
+}
+```

@@ -1,0 +1,68 @@
+---
+description: React optimization and best practices
+globs: ["src/**/*.{tsx,ts}", "app/**/*.{tsx,ts}"]
+alwaysApply: false
+---
+
+# React Optimization and Best Practices
+
+## React Rules
+- React client hooks must be used only in files with 'use client' directive
+- DO NOT import default React (React 19 JSX runtime). Import named hooks only
+
+## Performance Optimization
+- Always wrap functions in useCallback when they are passed as props, used in hook dependencies, or contain complex logic
+- Use useMemo for expensive calculations, data transformations, filtering/sorting large arrays, and objects passed as props
+- Use React.memo for components that re-render frequently with the same props or contain expensive rendering logic
+
+## Avoid Unnecessary Optimization
+- DO NOT use useMemo for module constants (values declared at module level outside component)
+- Move static arrays to module level if they don't depend on props/state/context
+- Avoid useCallback([]) for simple handlers - better to declare them at module level
+
+## Examples
+
+### Proper useCallback usage:
+```tsx
+const handleClick = useCallback(() => {
+  // handling logic
+}, [dependencies]);
+
+const switchLocale = useCallback(() => {
+  // navigation
+}, [pathname, router]);
+
+const fetchData = useCallback(async () => {
+  // API call
+}, [params]);
+```
+
+### Proper useMemo usage:
+```tsx
+const expensiveValue = useMemo(() => heavyCalculation(data), [data]);
+const filteredItems = useMemo(() => items.filter(item => item.active), [items]);
+const contextValue = useMemo(() => ({ user, updateUser: setUser }), [user]);
+```
+
+### React.memo for expensive components:
+```tsx
+const ExpensiveComponent = React.memo(({ data, onAction }) => {
+  return <div>{/* heavy rendering */}</div>;
+});
+```
+
+### Module constants (DO NOT memoize):
+```tsx
+// Good - module constant
+const ITEMS = [1, 2, 3];
+
+function Component() {
+  return <div>{ITEMS.map(item => <span key={item}>{item}</span>)}</div>;
+}
+
+// Bad - unnecessary memoization
+function Component() {
+  const items = useMemo(() => [1, 2, 3], []);
+  return <div>{items.map(item => <span key={item}>{item}</span>)}</div>;
+}
+```

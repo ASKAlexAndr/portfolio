@@ -1,0 +1,46 @@
+---
+description: Core project conventions for portfolio
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Core Project Conventions
+
+## Forbidden Paths and Files
+- DO NOT edit generated or dependency artifacts:
+  - node_modules/**
+  - .next/**
+  - build/**
+  - dist/**
+  - **/*.lock
+  - package-lock.json
+  - yarn.lock
+  - pnpm-lock.yaml
+
+- DO NOT edit lines ending with // IMPORTANT
+- DO NOT edit code inside /* IMPORTANT */ comment blocks
+- DO NOT commit secrets or environment files:
+  - .env
+  - .env.*
+  - env/*.env
+  - secrets/**
+
+## Package Management
+- Use only yarn for package management
+- Avoid npm/pnpm/bun commands in scripts/documentation
+- Examples: yarn, yarn add <pkg>, yarn add -D <pkg>
+
+## Allowed Exceptions
+- Modification is allowed if explicit override marker is present: // AI:ALLOW_MODIFY
+
+## Linting and Formatting
+- Keep ESLint clean in CI
+- Use Prettier formatting
+- Import order: builtin, external, internal (separate groups with blank line)
+
+## Comments
+- Avoid obvious/redundant comments that restate the code
+- Prefer comments that explain 'why', not 'what'
+- Examples:
+  - Bad: const count = count + 1; // Bad: increments count
+  - Good: // Good: Using +1 to avoid off-by-one when moving to the next page in pagination

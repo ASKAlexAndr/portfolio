@@ -1,0 +1,147 @@
+---
+description: Styling and internationalization
+globs: ["src/components/**/*.{tsx,ts}", "src/app/**/*.{tsx,ts}"]
+alwaysApply: false
+---
+
+# Styling and Internationalization
+
+## Styling
+- Avoid inline styles in React components; prefer Tailwind CSS utilities
+- Combine classes with clsx and normalize with tailwind-merge (cn helper)
+- Prefer lucide-react icons; use react-icons only if icon is missing in lucide
+
+## Styling Examples
+
+### Using cn helper:
+```tsx
+import { cn } from '@/lib/utils';
+
+function Button({ isActive, disabled, className, ...props }) {
+  return (
+    <button
+      className={cn(
+        'px-4 py-2 rounded-md transition-colors',
+        isActive && 'bg-primary text-white',
+        disabled && 'opacity-50 cursor-not-allowed',
+        className
+      )}
+      disabled={disabled}
+      {...props}
+    />
+  );
+}
+```
+
+### Using clsx:
+```tsx
+import clsx from 'clsx';
+
+function Card({ variant, className }) {
+  return (
+    <div
+      className={clsx(
+        'p-4 rounded-lg',
+        variant === 'primary' && 'bg-blue-100 text-blue-900',
+        variant === 'secondary' && 'bg-gray-100 text-gray-900',
+        className
+      )}
+    />
+  );
+}
+```
+
+### Icons:
+```tsx
+// Prefer lucide-react
+import { Heart, Star, User } from 'lucide-react';
+
+function IconButton() {
+  return (
+    <button>
+      <Heart className="w-5 h-5" />
+    </button>
+  );
+}
+```
+
+## Internationalization (i18n)
+- Avoid hardcoded UI strings in components; prefer t('key')
+- Use descriptive i18n keys with namespaces
+
+### i18n Examples:
+```tsx
+import { useTranslations } from 'next-intl';
+
+function ContactForm() {
+  const t = useTranslations('contact');
+  
+  return (
+    <form>
+      <label>{t('form.email.label')}</label>
+      <input type="email" placeholder={t('form.email.placeholder')} />
+      <button type="submit">{t('form.submit')}</button>
+    </form>
+  );
+}
+```
+
+### Key structure:
+```json
+{
+  "common": {
+    "button": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    }
+  },
+  "form": {
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    }
+  }
+}
+```
+
+## Animations
+- Use small, contained animations
+- Avoid animating large scroll containers without necessity
+
+```tsx
+import { motion } from 'framer-motion';
+
+function AnimatedCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 bg-white rounded-lg shadow-md"
+    >
+      Content
+    </motion.div>
+  );
+}
+```
+
+## Accessibility
+- Ensure accessible names (aria-label/aria-labelledby)
+- Use proper roles
+- Manage focus
+- Add alt text to images
+
+```tsx
+function AccessibleButton() {
+  return (
+    <button
+      aria-label="Close modal window"
+      onClick={handleClose}
+      className="p-2 rounded-full hover:bg-gray-100"
+    >
+      <X className="w-5 h-5" />
+    </button>
+  );
+}
+```
